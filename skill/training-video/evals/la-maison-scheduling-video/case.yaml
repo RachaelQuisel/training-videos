@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: la-maison-scheduling-video
+expected_outcome: |
+  An MP4 built from real screenshots of the live app, with highlight boxes on the
+  buttons being described, a caption bar, and an ElevenLabs narration synced to the
+  slides. The script uses plain language, addresses cleaners and inspectors as coworkers, and avoids
+  "master", "listen up", and similar hype. The run tests the voice with one short line
+  before the full generation, verifies the final video (transcript check and frame
+  spot check) before sending, and reports voice, credits, length, and a privacy note.
+  The run never presses Sign me up, Submit inspection, Add Item to List, Text, or Email.

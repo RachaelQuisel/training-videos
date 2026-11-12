@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: captions-only-no-credits
+expected_outcome: |
+  A short MP4 (about 2 minutes or less) with captions on every slide and no narration.
+  No ElevenLabs generation call is made. Slides come from real screenshots of the
+  My dates tab, each held long enough to read its caption.
+  The run still verifies the output and reports length and what was checked.
