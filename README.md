@@ -4,7 +4,7 @@ How-to videos of web apps, built from real screenshots with the `training-video`
 
 | Video | Folder | Captured | Length | Voice |
 |---|---|---|---|---|
-| How to Use the La Maison Scheduling Page | `la-maison-scheduling-page-2026-11-11/` | 2026-11-11 | 3 min 26 s | Claire (ElevenLabs) |
+| How to Use the La Maison Scheduling Page | `la-maison-scheduling-page-2026-11-11/` | 2026-11-11 (evening, after the app's redesign) | 4 min 28 s | Claire, ElevenLabs expressive model (eleven_v4) |
 
 ## What is in each folder
 
@@ -16,7 +16,8 @@ How-to videos of web apps, built from real screenshots with the `training-video`
 - `brand.json`: colors, label, and logo position for the cards and caption bar.
 - `boundaries.json`: when each slide starts.
 - `capture.js`: the script that took the screenshots. It blocks every request that would save data.
-- `v1-first-draft/`: earlier versions, when there are any.
+- `v1-first-draft/`, `v2-short-cut/`: earlier versions, when there are any. The La Maison ones show the app before its navy and yellow redesign.
+- In `script.json`, `spoken` is the caption text and `tts` is the same line with the expression tags sent to the voice.
 
 ## Updating a video
 
