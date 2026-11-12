@@ -85,6 +85,12 @@ footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
   <div class="eyebrow">La Maison · Santa Barbara</div>
   <h1>A how-to video built from an app's real screens</h1>
   <p class="lede">La Maison's scheduling app is built on Zite. This walk-through shows cleaners and property inspectors every tab before their first day. Click any line of the transcript to jump to it.</p>
+  <ul class="pills" style="margin-top:18px">
+  <li><a class="pill solid" href="https://5xvhzkfujh.zite.so">Open the La Maison app</a></li>
+  <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos">The repository</a></li>
+  <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/tree/main/skill/training-video">The skill</a></li>
+  <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/blob/main/docs/prd.md">The product requirements</a></li>
+</ul>
   <ul class="stats">
     <li><b>4:28</b><span>start to finish</span></li>
     <li><b>52</b><span>slides, one idea each</span></li>
@@ -127,18 +133,6 @@ footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
 </section>
 
 <section>
-  <h2>The app changed while the video was being made</h2>
-  <p class="sub">Between the afternoon and the evening, the app was redesigned and reworded. The skill re-reads the app before each cut, so it found the change, recaptured all 28 screens, and corrected the script. Drag to compare.</p>
-  <div class="compare" id="cmp">
-    <img src="__V__/v2-short-cut/frames/home.png" alt="The app in the afternoon: green tabs, orange logo, cream background">
-    <img class="after" src="__V__/frames/home.png" alt="The app in the evening: navy tabs, navy logo, white background, a welcome message">
-    <span class="tag l">Afternoon</span><span class="tag r">Evening</span>
-    <div class="handle"></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Compare the afternoon and evening screens">
-  </div>
-</section>
-
-<section>
   <h2>Checked, with the numbers</h2>
   <ul class="facts">
     <li><b>783 of 791</b><span>script words matched to the audio for slide timing</span></li>
@@ -148,15 +142,6 @@ footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
   </ul>
 </section>
 
-<section>
-  <h2>See the rest</h2>
-  <ul class="pills">
-    <li><a class="pill solid" href="https://5xvhzkfujh.zite.so">Open the La Maison app</a></li>
-    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos">The repository</a></li>
-    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/tree/main/skill/training-video">The skill</a></li>
-    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/blob/main/docs/prd.md">The product requirements</a></li>
-  </ul>
-</section>
 <footer>Made by Rachael Quisel. This page is generated from the same script file that built the video.</footer>
 </div>
 
@@ -230,10 +215,6 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowUp') { e.preventDefault(); seek(D.lines[Math.max(0, cur - 1)].t); }
   else if (/^[1-5]$/.test(e.key)) { seek(D.chapters[+e.key - 1].start); }
 });
-
-// before and after slider
-const cmp = document.getElementById('cmp'), rng = cmp.querySelector('input');
-rng.addEventListener('input', () => cmp.style.setProperty('--x', rng.value + '%'));
 </script>
 </body>
 </html>
