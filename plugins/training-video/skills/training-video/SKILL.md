@@ -83,8 +83,12 @@ Setup on a new computer:
 
 ```
 pip install -r requirements.txt
+npm install -g playwright
+npx playwright install chromium
 npx -y @elevenlabs/cli@latest onboard connect --env-path ~/.config/elevenlabs/.env.local
 ```
+
+ffmpeg must also be installed. On a Mac: `brew install ffmpeg`.
 
 1. List the voices: `python3 scripts/narrate.py voices --use-case informative_educational`. Claire is the default voice. Her voice id is `umwdC76NumBsGtudno3p`.
 2. Make one short test clip: `python3 scripts/narrate.py clip "<text>" test.mp3`. Write one or two sentences that contain every name in the script: the app, the organization, people, and tools.

@@ -1,6 +1,9 @@
 // Full read-only recapture after the app changed (evening of 2026-11-11). Only list*/get* requests go through.
 const { chromium } = require('playwright'); const fs = require('fs');
-const BASE = 'https://5xvhzkfujh.zite.so/', S = 4 / 3, boxes = {};
+const S = 4 / 3, boxes = {};
+// Each person has their own link to the app. Paste a cleaner's link and an inspector's link here.
+const CLEANER_LINK = '';
+const INSPECTOR_LINK = '';
 const wait = (p, ms) => p.waitForTimeout(ms);
 async function box(key, loc) { try { const b = await loc.first().boundingBox({ timeout: 5000 }); if (b) boxes[key] = { x: b.x * S, y: b.y * S, width: b.width * S, height: b.height * S }; else console.warn('NO BOX', key); } catch (e) { console.warn('BOX FAILED', key, e.message.split('\n')[0]); } }
 const shot = (p, n) => p.screenshot({ path: `frames/${n}.png` });
@@ -17,7 +20,7 @@ const btn = (p, t) => p.locator('button:visible', { hasText: t });
 
   // ---------- cleaner link
   const p = await ctx.newPage();
-  await p.goto(BASE + '?cleaner=Sam', { waitUntil: 'networkidle', timeout: 60000 }); await wait(p, 4000);
+  await p.goto(CLEANER_LINK, { waitUntil: 'networkidle', timeout: 60000 }); await wait(p, 4000);
   await shot(p, 'home'); await box('tabs', p.getByRole('tablist'));
   for (const [k, n] of [['tab_mydates', 'My dates'], ['tab_tasks', 'Tasks'], ['tab_supplies', 'Supplies'], ['tab_contractors', 'Contractors'], ['tab_help', 'Help']]) await box(k, tab(p, n));
   await box('greeting', p.locator('h1:visible')); await box('step2', p.locator('span:visible,div:visible', { hasText: /^2$/ }).last());
@@ -38,7 +41,7 @@ const btn = (p, t) => p.locator('button:visible', { hasText: t });
 
   // ---------- inspector link
   const q = await ctx.newPage();
-  await q.goto(BASE + '?inspector=Sam', { waitUntil: 'networkidle', timeout: 60000 }); await wait(q, 4000);
+  await q.goto(INSPECTOR_LINK, { waitUntil: 'networkidle', timeout: 60000 }); await wait(q, 4000);
   await shot(q, 'insp_home'); await box('insp_greeting', q.locator('h1:visible'));
   const io = q.locator('button[aria-pressed="false"]:visible:not([disabled])').first(); await top(q, io, 150); await shot(q, 'insp_open'); await box('insp_card_open', io);
   await tab(q, 'Tasks').click(); await wait(q, 9000); await q.evaluate(() => window.scrollTo(0, 0)); await wait(q, 300);

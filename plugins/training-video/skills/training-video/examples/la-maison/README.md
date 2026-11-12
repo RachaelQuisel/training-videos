@@ -8,7 +8,7 @@ La Maison is a vacation rental in Santa Barbara. Its scheduling app is built on 
 
 - The app: https://5xvhzkfujh.zite.so
 - The app opens without a login.
-- Each person gets their own link. A cleaner's link ends in `?cleaner=Name`. An inspector's link ends in `?inspector=Name`.
+- Each person gets their own link.
 
 The app has five tabs.
 
@@ -34,7 +34,7 @@ The app has five tabs.
 - `script.json` is the full script. Each segment has `spoken` text for the caption and `tts` text for the voice.
 - `brand.json` holds the colors, the label, and the logo position.
 - `boxes.json` holds the measured position of every highlighted button.
-- `capture.js` is the capture script. It sets the read-only block, the 4/3 zoom, and the clicks for each screen.
+- `capture.js` is the capture script. It sets the read-only block, the 4/3 zoom, and the clicks for each screen. The two personal links are left blank; fill in your own before you run it.
 
 The screenshots and the narration audio are in the repository: https://github.com/RachaelQuisel/training-videos/tree/main/la-maison-scheduling-page-2026-11-11
 

@@ -4,13 +4,9 @@ Rachael Quisel wrote this document from the build of November 11, 2026. The skil
 
 ## Problem Statement
 
-I build small web apps for people who do not work in software. They include the cleaners and property inspectors at La Maison, my vacation rental in Santa Barbara. They also include staff at the nonprofits I work with. These people are capable adults who do hard work. Most of them will not read a written guide.
+I run La Maison, a vacation rental in Santa Barbara. I built a scheduling app for my cleaners and property inspectors. My team needed a walk-through of that app.
 
-When I give someone a new app with no walkthrough, one of three things happens.
-
-- They call or text me to ask where to tap.
-- They guess. At La Maison, the costly guess is to check a date and leave. That looks like signing up, and it is not. The cleaning then has no cleaner.
-- They stop using the app. They go back to texting me their dates.
+The app has one step that is easy to miss. A checked date is not a sign-up. A person is signed up only after they tap Sign me up. A walk-through has to make that clear.
 
 I tried an AI video tool that makes a video from a written guide. It failed in three ways.
 
@@ -20,13 +16,12 @@ I tried an AI video tool that makes a video from a written guide. It failed in t
 
 Each video took a full review to correct.
 
-I wanted a video with five properties.
+I wanted a video with four properties.
 
 - It shows the real app.
 - It says only true things.
 - It sounds like a friendly coworker.
-- It costs a few dollars.
-- It can be rebuilt in minutes when the app changes.
+- It can be updated when the app changes.
 
 ## Solution
 

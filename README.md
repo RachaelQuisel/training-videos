@@ -31,12 +31,24 @@ claude plugin marketplace add RachaelQuisel/training-videos
 claude plugin install training-video@training-video
 ```
 
+The plugin's scripts need four tools on your computer. Install them once.
+
+```sh
+pip install pillow numpy faster-whisper elevenlabs python-dotenv
+npm install -g playwright
+npx playwright install chromium
+brew install ffmpeg
+```
+
+`brew` is the Mac installer. On Windows or Linux, install ffmpeg with your own package manager.
+
 For narration, store your own ElevenLabs API key on your computer. The plugin contains no key.
 
 ```sh
-pip install elevenlabs python-dotenv
 npx -y @elevenlabs/cli@latest onboard connect --env-path ~/.config/elevenlabs/.env.local
 ```
+
+I have run these tools on my own Mac. I have not yet tested the two plugin commands on a second computer.
 
 ## Make a video
 

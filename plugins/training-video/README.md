@@ -23,10 +23,14 @@ Type a request inside Claude Code:
 
 ## What it needs
 
-- Playwright with Chromium
-- ffmpeg
-- Python with Pillow, faster-whisper, elevenlabs, and python-dotenv
-- Your own ElevenLabs API key, for narration
+```sh
+pip install pillow numpy faster-whisper elevenlabs python-dotenv
+npm install -g playwright
+npx playwright install chromium
+brew install ffmpeg
+```
+
+For narration, you also need your own ElevenLabs API key.
 
 A captions-only video needs no ElevenLabs key.
 
