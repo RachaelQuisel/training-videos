@@ -14,7 +14,7 @@ When I hand someone a new app with no walkthrough, three things happen.
 
 I tried the usual ways to make a walkthrough, and each one failed for a specific reason.
 
-- A screen recording takes me an hour, I stumble, and it is out of date the next time I change the app. My apps change often. La Maison's app was redesigned in the middle of the day this build happened.
+- A screen recording takes me an hour, I stumble, and it is out of date the next time I change the app. My apps change often.
 - An AI video summary of a written guide produced slides with no real screens, added hype ("listen up"), and stated rules the app does not have. Each one took a full review pass to correct.
 - A written guide with screenshots is accurate and nobody opens it.
 
@@ -84,7 +84,7 @@ The first video made this way is the La Maison app walk-through: 4 minutes 28 se
 
 **Slides, not a screen recording.** The video is assembled from still screenshots. One line of the script maps to one screen and usually one highlight. This is what makes a single line or a single screen replaceable.
 
-**The live app is the source of facts.** The build opens the app in a headless browser and lists every tab, heading, and control before any script exists. Facts the screen does not show are read from the app's own code, and the script says so when a line rests on that. During this build the app was restyled and reworded between the afternoon and the evening. The second inventory found new welcome boxes on every tab, a renamed supply list, a changed vendor list, and a line about Slack that was gone. All 28 screens were recaptured and the script was corrected to match.
+**The live app is the source of facts.** The build opens the app in a headless browser and lists every tab, heading, and control before any script exists. Facts the screen does not show are read from the app's own code, and the script says so when a line rests on that.
 
 **Capture cannot write.** The browser session allows only requests that read data. Any other request to the app is stopped before it leaves the machine. Controls that write (Sign me up, Submit inspection, Add Item to List, Text, Email) are measured and highlighted, never pressed. Actions that only change what the page shows, such as checking a date box or typing in a search field, are allowed because they are what the viewer most wants to see.
 
@@ -128,7 +128,6 @@ A good test here checks what a viewer or an owner would notice, not how a script
 
 **What I learned.**
 
-- An app can change while you are making a video about it. Re-reading the app before each cut found a redesign that would otherwise have shipped a video of the old screens.
 - A short test clip misjudges pace. The same voice read a 30-word clip slowly and a 580-word script quickly, so length is better estimated from a full run than from the test.
 - A small transcriber can mishear a name the voice said correctly. Two lines that looked wrong were right when rechecked with a larger one.
 - Accuracy is not enough. The first cut said only true things and was dull. Tone is a requirement, not a finish.

@@ -77,7 +77,7 @@ The [working instructions](skill/training-video/SKILL.md) have every step. The [
 - `frames/`: the screenshots, 1280 by 720.
 - `boxes.json`, `brand.json`, `boundaries.json`: highlight positions, colors, and slide timing.
 - `capture.js`: the script that took the screenshots.
-- `v1-first-draft/` and `v2-short-cut/`: earlier cuts, made before the app's navy and yellow redesign.
+- `v1-first-draft/` and `v2-short-cut/`: earlier cuts.
 
 ## Access and scope
 
