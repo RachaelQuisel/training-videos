@@ -30,7 +30,7 @@ The video makes the app much easier to use. A new cleaner can watch it once and 
 ## What it works with
 
 - **[Zite](https://www.zite.com) apps**, like La Maison, and any other web app that opens in a browser without a login.
-- **[ElevenLabs](https://elevenlabs.io)** for the narration. The example uses the Claire voice on the expressive model.
+- **[ElevenLabs](https://elevenlabs.io)** for the narration, through your own API key. The example uses the Claire voice on the expressive model.
 - **Airtable**, when the app sits on a base. The skill reads field options and statuses from the live base so the script states them correctly.
 - **Playwright and Chromium** to open the app and capture the screens.
 - **faster-whisper** to transcribe the narration for timing and for the final check.
@@ -41,13 +41,29 @@ No ElevenLabs account? Choose captions only, or the free local voice. Neither on
 
 ## How it works
 
-1. You give it a link and answer five questions: who is watching, which voice, how to handle personal data on screen, which colors, and how long.
-2. It reads the live app and lists every tab and button, so the script covers the whole app.
-3. It writes the script and shows you the outline before anything costs money.
-4. It captures the screens. Requests that would save data are blocked, and buttons that write data are never pressed.
-5. It tests the voice on one short clip, then generates the full narration.
-6. It builds the slides, times them to the voice, and assembles the video.
-7. It checks the result and tells you the length, the credits spent, and what it verified.
+You type one request. The skill does the rest in ten steps, and it stops for your approval before anything costs money.
+
+1. **It asks five questions at once.** Who is watching, voice or captions only, how to handle personal data on screen, which colors and logo, and how long the video should be.
+2. **It reads the live app.** It lists every tab and button first, so the script covers the whole app and nothing is left out by accident.
+3. **It shows you an outline and waits for your yes.** You see what the narrator will say and which screens will appear. This is the free place to change your mind.
+4. **It writes the script.** One short sentence per slide, tied to one screen and one button, then rewritten in plain English.
+5. **It captures the screens.** It clicks through the app the way your staff would. Requests that would save data are blocked, and buttons that write data are not pressed.
+6. **It tests the voice on one short clip.** The clip contains every name in the script (your app, your company, your tools), so a name the voice says wrong gets fixed for a few credits.
+7. **It generates the full narration.** One request to ElevenLabs with your own API key, and it records how many credits were charged.
+8. **It builds the slides.** Each screenshot gets a box around the button being described and a caption bar underneath. Title and closing slides use your colors.
+9. **It times the slides to the voice and assembles the video.** It listens to the narration, finds where each sentence starts, and shows each slide just before its first word.
+10. **It checks the result before you see it.** It transcribes the finished audio to catch wrong names, pulls frames to confirm each slide matches its narration, and tells you the voice, the length, the credits spent, and what it verified. If one line is wrong, it redoes that line only.
+
+### Your ElevenLabs key stays on your computer
+
+The skill contains no API key. Narration runs with a key you store in one file on your own computer, outside the skill folder, so the key is not part of anything you copy, share, or push to GitHub. One-time setup:
+
+```sh
+pip install -r ~/.claude/skills/training-video/requirements.txt
+npx -y @elevenlabs/cli@latest onboard connect --env-path ~/.config/elevenlabs/.env.local
+```
+
+The second command opens ElevenLabs in your browser, asks you to approve, and saves the key to that file. If there is no key file, the skill can use the ElevenLabs connector in Claude instead.
 
 ## Use the skill
 
