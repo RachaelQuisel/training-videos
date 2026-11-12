@@ -137,4 +137,3 @@ A good test here checks what a viewer or an owner would notice, not how a script
 
 - One line describes a screen that appears only after a real sign-up. It was written from the app's code and has not been seen on screen.
 - The two written test cases have not been run.
-- The La Maison app has no login, and its link is public in this repository.
