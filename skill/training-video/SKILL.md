@@ -8,6 +8,8 @@ compatibility: Needs the sandbox shell with Playwright and Chromium, ffmpeg, pdf
 
 Build a how-to video of a web app for non-technical staff. Real screens, one idea per slide, a red box around the button being described, a caption bar, and a calm narrator. Output: an MP4 at 1280x720, usually 4 to 8 minutes.
 
+Example: the La Maison app walk-through, a Zite scheduling app for cleaners and property inspectors (4 minutes 28 seconds, Claire on eleven_v4): https://github.com/RachaelQuisel/training-videos/blob/main/la-maison-scheduling-page-2026-11-11/LaMaison-App-Walk-through-Video.mp4 . Watch it in a browser at https://rachaelquisel.github.io/training-videos/ . Its script.json, frames, boxes.json, and capture script are in the same folder of that repository and show what a finished build looks like.
+
 This replaces the NotebookLM route. NotebookLM videos skip the screenshots, add hype, and invent rules, and each one takes a review pass to catch that. Building from the real app with a checked script avoids all three.
 
 The bundled scripts do the repeatable parts. Read `references/script-rules.md` before writing the script; it holds the tone rules, the pronunciation spellings, and the exact JSON the scripts read.

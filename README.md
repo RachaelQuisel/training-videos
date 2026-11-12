@@ -1,50 +1,92 @@
 # Training Videos
 
-I make short how-to videos of the web apps I build, and I make them from the real screens. Each one has real screenshots, a yellow box around the button I'm talking about, captions, and a narrator. This repo holds the videos and the Claude skill I use to build them.
+**Turn any web app into a short, narrated how-to video built from its real screens.**
 
-## The La Maison scheduling page video
+I build apps for people who would rather not read a manual. So each app gets a video: real screenshots, a yellow box around the button I'm talking about, captions, and a friendly narrator. This repo has the Claude skill that builds those videos and a finished example you can watch.
 
-La Maison is my property in Santa Barbara. Cleaners and inspectors use this app to sign up for dates, work through the inspection checklist, report supplies that are running low, and reach our contractors.
+[![Watch the La Maison app walk-through](la-maison-scheduling-page-2026-11-11/preview.jpg)](https://rachaelquisel.github.io/training-videos/)
 
-- The app: https://5xvhzkfujh.zite.so
-- The video: [`la-maison-scheduling-page-2026-11-11/LaMaison-Scheduling-Page-Video.mp4`](la-maison-scheduling-page-2026-11-11/LaMaison-Scheduling-Page-Video.mp4)
-- Length: 4 minutes 28 seconds, 52 slides
-- Voice: Claire, on the expressive ElevenLabs model
-- Captured: November 11, 2026
+**[Watch the La Maison app walk-through](https://rachaelquisel.github.io/training-videos/)** (4 minutes 28 seconds)
 
-The video covers all five tabs: My dates, Tasks, Supplies, Contractors, and Help. Nothing was saved to the app while the screens were captured. The buttons that write data (Sign me up, Submit inspection, Add Item to List, Text, Email) were never pressed.
+## The example: La Maison
 
-## The skill
+La Maison is my vacation rental in Santa Barbara. Its scheduling app is built on [Zite](https://www.zite.com). Cleaners and property inspectors use it to sign up for dates, work through a 76-item inspection checklist, report supplies that are running low, and text or email our contractors.
 
-`skill/training-video/` is the Claude skill that builds these. I type `/training-video` with a link, answer a few questions, and it does the rest:
+- **The app:** https://5xvhzkfujh.zite.so
+- **The video:** [watch it in your browser](https://rachaelquisel.github.io/training-videos/), or [open the file](la-maison-scheduling-page-2026-11-11/LaMaison-App-Walk-through-Video.mp4)
+- **Everything behind it:** [script, screenshots, narration, and capture script](la-maison-scheduling-page-2026-11-11/)
 
-1. It reads the live app and lists every tab and button, so the script covers the whole app.
-2. It writes the script in plain English, one idea per slide.
-3. It captures the screens without changing any data.
-4. It tests the voice on one short clip before paying for the full narration.
-5. It builds the slides, times each one to the voice, and assembles the video.
-6. It transcribes the finished audio and checks five frames before it calls the video done.
+The video makes the app much easier to use. A new cleaner can watch it once and know which tab to open, which card to tap, and that their name is only on the calendar after they tap Sign me up. An inspector sees the checklist, the supplies form, and the contractor list before their first visit. I send the link with each person's sign-up link, and they don't need me on the phone to get started.
 
-`SKILL.md` has the full steps. `references/script-rules.md` has the tone rules and the file formats. `scripts/` has the parts that run the same way every time.
+## What you get
 
-You'll need Playwright, ffmpeg, Python with Pillow and faster-whisper, and an ElevenLabs account for the voice. Captions-only videos need no ElevenLabs credits.
+- **A real walkthrough.** Every slide is a screenshot of the live app, captured the day the video is made.
+- **One idea per slide.** A yellow box marks the button being described, and a caption repeats the line for anyone watching without sound.
+- **A script in plain English.** Short sentences, no hype, and the one rule that matters most said twice.
+- **A voice that fits.** A warm ElevenLabs narrator, timed so each slide appears just before its first word.
+- **A checked result.** The finished audio is transcribed and compared to the script, and frames are pulled to confirm each slide matches its narration.
+- **Files you can reuse.** The script, screenshots, and highlight positions are saved next to the video, so an app change means redoing only the screens and lines that changed.
+
+## What it works with
+
+- **[Zite](https://www.zite.com) apps**, like La Maison, and any other web app that opens in a browser without a login.
+- **[ElevenLabs](https://elevenlabs.io)** for the narration. The example uses the Claire voice on the expressive model.
+- **Airtable**, when the app sits on a base. The skill reads field options and statuses from the live base so the script states them correctly.
+- **Playwright and Chromium** to open the app and capture the screens.
+- **faster-whisper** to transcribe the narration for timing and for the final check.
+- **ffmpeg and Pillow** to build the slides and assemble the video.
+- **Claude Code**, where the skill runs.
+
+No ElevenLabs account? Choose captions only, or the free local voice. Neither one uses credits.
+
+## How it works
+
+1. You give it a link and answer five questions: who is watching, which voice, how to handle personal data on screen, which colors, and how long.
+2. It reads the live app and lists every tab and button, so the script covers the whole app.
+3. It writes the script and shows you the outline before anything costs money.
+4. It captures the screens. Requests that would save data are blocked, and buttons that write data are never pressed.
+5. It tests the voice on one short clip, then generates the full narration.
+6. It builds the slides, times them to the voice, and assembles the video.
+7. It checks the result and tells you the length, the credits spent, and what it verified.
+
+## Use the skill
+
+Copy [`skill/training-video/`](skill/training-video/) into your Claude Code skills folder:
+
+```sh
+git clone https://github.com/RachaelQuisel/training-videos
+cp -R training-videos/skill/training-video ~/.claude/skills/
+```
+
+Then, inside Claude Code, type a request like one of these:
+
+> /training-video https://5xvhzkfujh.zite.so
+
+> Make a how-to video of this app for my cleaners. Use a friendly voice and keep it under five minutes. [your app link]
+
+> Make a captions-only video of the My dates tab. Don't spend any ElevenLabs credits. [your app link]
+
+The [working instructions](skill/training-video/SKILL.md) have every step. The [script rules](skill/training-video/references/script-rules.md) have the tone rules and file formats, with the La Maison script as the example.
 
 ## What's in a video folder
 
-- `LaMaison-Scheduling-Page-Video.mp4`: the finished video.
-- `script.json`: every spoken line, its screen, and what is highlighted. `spoken` is the caption text. `tts` is the same line with the expression tags sent to the voice.
+- `LaMaison-App-Walk-through-Video.mp4`: the finished video.
+- `preview.jpg`: the still image shown above.
+- `script.json`: every spoken line, its screen, and what is highlighted.
 - `narration.txt` and `narration.mp3`: the narration text and audio.
 - `frames/`: the screenshots, 1280 by 720.
-- `boxes.json`: where each highlighted button sits on the screen.
-- `brand.json`: the colors, label, and logo position.
-- `boundaries.json`: when each slide starts.
-- `capture.js`: the script that took the screenshots. It blocks every request that would save data.
-- `v1-first-draft/` and `v2-short-cut/`: earlier cuts. They show the app before its navy and yellow redesign.
+- `boxes.json`, `brand.json`, `boundaries.json`: highlight positions, colors, and slide timing.
+- `capture.js`: the script that took the screenshots.
+- `v1-first-draft/` and `v2-short-cut/`: earlier cuts, made before the app's navy and yellow redesign.
 
-## When the app changes
+## Access and scope
 
-I compare the app's tabs and buttons against `script.json`, recapture only the screens that changed, and regenerate only the lines that changed.
+The skill reads an app and takes screenshots. It doesn't sign anyone up, submit a form, or send a message. Apps behind a login can't be captured this way; attach screenshots instead.
 
-## A note on what you'll see
+The La Maison video shows the app as my team sees it, with first names of our cleaners and inspectors and contact details for our contractors. For your own video, the skill asks whether to keep, blur, or skip personal data before it captures anything.
 
-The video shows the app as my team sees it: first names of our cleaners and inspectors, and the phone numbers and emails of our contractors.
+Narration uses your ElevenLabs credits, about one credit per character. The La Maison narration used about 4,250.
+
+## Help and details
+
+Maintained by Rachael Quisel. [Ask a question or report a problem](https://github.com/RachaelQuisel/training-videos/issues).
