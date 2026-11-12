@@ -37,7 +37,7 @@ The video makes the app much easier to use. A new cleaner can watch it once and 
 - **ffmpeg and Pillow** to build the slides and assemble the video.
 - **Claude Code**, where the skill runs.
 
-No ElevenLabs account? Choose captions only, or the free local voice. Neither one uses credits.
+No ElevenLabs account? Choose captions only. That uses no credits.
 
 ## How it works
 
@@ -72,6 +72,13 @@ Copy [`skill/training-video/`](skill/training-video/) into your Claude Code skil
 ```sh
 git clone https://github.com/RachaelQuisel/training-videos
 cp -R training-videos/skill/training-video ~/.claude/skills/
+```
+
+For narration, store your own ElevenLabs API key on your computer. The skill contains no key.
+
+```sh
+pip install -r ~/.claude/skills/training-video/requirements.txt
+npx -y @elevenlabs/cli@latest onboard connect --env-path ~/.config/elevenlabs/.env.local
 ```
 
 Then, inside Claude Code, type a request like one of these:

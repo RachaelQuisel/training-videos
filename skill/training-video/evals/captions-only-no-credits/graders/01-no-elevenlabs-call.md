@@ -4,4 +4,4 @@ focus: trace
 weight: 1
 ---
 
-The run never calls creative_generate_speech or any other ElevenLabs generation tool.
+The run never runs `narrate.py clip` or `narrate.py script`, and never calls any other ElevenLabs generation tool.

@@ -9,16 +9,24 @@
 // - Scroll a target into view before measuring it; measure again after any scroll,
 //   because boundingBox() is relative to the viewport.
 // - Open dropdowns and menus to screenshot them, then press Escape. Change no data.
-// - Downloads (a PDF export) are allowed; render page 1 with: pdftoppm -png -r 110 -f 1 -l 1 export.pdf frames/pdf
-const { chromium } = require('playwright');
+// - READ_ONLY_API stops every request to the app's API that is not a read, so a mistaken click cannot
+//   save anything. Set the two patterns for the app; every stopped request is printed.
+// - For a narrow, phone-shaped app, set ZOOM to 4/3: the page renders at 960x540 and the frames still
+//   come out 1280x720, with boxes scaled to match.
+let pw;
+try { pw = require('playwright'); }
+catch (e) { pw = require(require('child_process').execSync('npm root -g').toString().trim() + '/playwright'); }
+const { chromium } = pw;
 const fs = require('fs');
 
 const URL = 'https://EXAMPLE.zite.so/';
+const ZOOM = 1;                                   // 1, or 4/3 for narrow apps
+const READ_ONLY_API = { match: '**/api/**', allow: /\/api\/(list|get)/ };   // null to turn off
 const boxes = {};
 fs.mkdirSync('frames', { recursive: true });
 
 async function box(p, key, loc) {
-  try { const b = await loc.first().boundingBox(); if (b) boxes[key] = b; else console.warn('no box for', key); }
+  try { const b = await loc.first().boundingBox(); if (b) boxes[key] = { x: b.x * ZOOM, y: b.y * ZOOM, width: b.width * ZOOM, height: b.height * ZOOM }; else console.warn('no box for', key); }
   catch (e) { console.warn('box failed for', key, e.message); }
 }
 async function shot(p, name) { await p.screenshot({ path: `frames/${name}.png` }); }
@@ -26,7 +34,11 @@ const wait = (p, ms) => p.waitForTimeout(ms);
 
 (async () => {
   const b = await chromium.launch();
-  const ctx = await b.newContext({ viewport: { width: 1280, height: 720 }, acceptDownloads: true });
+  const ctx = await b.newContext({ viewport: { width: Math.round(1280 / ZOOM), height: Math.round(720 / ZOOM) }, deviceScaleFactor: ZOOM });
+  if (READ_ONLY_API) await ctx.route(READ_ONLY_API.match, r => {
+    if (READ_ONLY_API.allow.test(r.request().url())) return r.continue();
+    console.log('[BLOCKED WRITE]', r.request().method(), r.request().url()); return r.abort();
+  });
   const p = await ctx.newPage();
   await p.goto(URL, { waitUntil: 'networkidle', timeout: 45000 }); await wait(p, 2500);
 
@@ -46,10 +58,6 @@ const wait = (p, ms) => p.waitForTimeout(ms);
   // 4. A popover opened by a titled button
   // await p.locator('button[title="Send SMS"]').first().click(); await wait(p, 1000);
   // await shot(p, 'smsmenu'); await p.keyboard.press('Escape');
-
-  // 5. A download (PDF export)
-  // const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 20000 }), p.getByText('Export PDF', { exact: true }).click()]);
-  // await dl.saveAs('export.pdf');
 
   fs.writeFileSync('boxes.json', JSON.stringify(boxes, null, 1));
   console.log('boxes:', Object.keys(boxes).join(', '));

@@ -56,7 +56,7 @@ def main(video, script_path, bounds_path, *watch):
         d = ImageDraw.Draw(im)
         label = f'{t:.0f}s  seg {p}: ' + (segs[p].get('caption') or segs[p]['spoken'])[:70]
         d.rectangle([0, 0, 640, 18], fill='yellow')
-        d.text((4, 3), label, fill='black', font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 11))
+        d.text((4, 3), label, fill='black', font=ImageFont.truetype(next(p for p in ('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/System/Library/Fonts/Supplemental/Arial.ttf', '/Library/Fonts/Arial.ttf', 'C:/Windows/Fonts/arial.ttf') if os.path.exists(p)), 11))
         ims.append(im)
         print(f'{t:6.1f}s  segment {p}: {segs[p]["spoken"][:80]}')
     sheet = Image.new('RGB', (1280, 360 * 3), 'white')

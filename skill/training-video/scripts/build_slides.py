@@ -6,7 +6,8 @@ Usage:
 
 script.json  : title, subtitle, end_title, end_subtitle, caption_fixes, segments
 boxes.json   : {key: {x, y, width, height}} from capture_template.js (viewport pixels)
-brand.json   : red, black, category_label, logo {screen, box}, fonts (optional)
+brand.json   : red (highlight), black (caption bar and titles), category_label, logo {screen, box},
+               optional edge (thin outline around each highlight) and label_color
 frames/      : frames/<screen>.png for every screen a segment names
 seg/         : output folder, seg/00.png, seg/01.png, ...
 
@@ -21,8 +22,25 @@ W, H = 1280, 720
 SCALE = 0.875          # leaves 90px at the bottom for the caption bar
 CAP_H = H - int(H * SCALE)
 OX = int((W - W * SCALE) / 2)
-F = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
-FB = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+
+
+def find_font(bold=False):
+    """Return a font file that exists on this machine (Linux sandbox first, then macOS, then Windows)."""
+    names = [
+        ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'),
+        ('/System/Library/Fonts/Supplemental/Arial Bold.ttf', '/System/Library/Fonts/Supplemental/Arial.ttf'),
+        ('/Library/Fonts/Arial Bold.ttf', '/Library/Fonts/Arial.ttf'),
+        ('C:/Windows/Fonts/arialbd.ttf', 'C:/Windows/Fonts/arial.ttf'),
+    ]
+    for b, r in names:
+        path = b if bold else r
+        if os.path.exists(path):
+            return path
+    raise SystemExit('No usable font found. Add a .ttf path to find_font().')
+
+
+F = find_font()
+FB = find_font(bold=True)
 
 
 def hexrgb(h):
@@ -36,6 +54,8 @@ def main(script_path, boxes_path, brand_path, frames_dir, out_dir):
     boxes.update(script.get('extra_boxes', {}))
     brand = json.load(open(brand_path))
     RED, BLACK = hexrgb(brand.get('red', '#CC2222')), hexrgb(brand.get('black', '#1a1a1a'))
+    EDGE = hexrgb(brand['edge']) if brand.get('edge') else None
+    LABEL = hexrgb(brand['label_color']) if brand.get('label_color') else RED
     fixes = script.get('caption_fixes', {})
     os.makedirs(out_dir, exist_ok=True)
 
@@ -61,7 +81,7 @@ def main(script_path, boxes_path, brand_path, frames_dir, out_dir):
             lh = int(logo.height * lw / logo.width)
             im.paste(logo.resize((lw, lh)), (80, 80))
         if brand.get('category_label'):
-            d.text((80, 240), brand['category_label'], font=ImageFont.truetype(FB, 18), fill=RED)
+            d.text((80, 240), brand['category_label'], font=ImageFont.truetype(FB, 18), fill=LABEL)
         y = 280
         for line in textwrap.wrap(title, 36):
             d.text((80, y), line, font=ImageFont.truetype(FB, 46), fill=BLACK)
@@ -102,7 +122,9 @@ def main(script_path, boxes_path, brand_path, frames_dir, out_dir):
                 y0 = (b['y'] - p) * SCALE
                 x1 = OX + (b['x'] + b['width'] + p) * SCALE
                 y1 = (b['y'] + b['height'] + p) * SCALE
-                d.rounded_rectangle([x0, y0, x1, y1], radius=8, outline=RED, width=4)
+                if EDGE:
+                    d.rounded_rectangle([x0 - 2, y0 - 2, x1 + 2, y1 + 2], radius=10, outline=EDGE, width=2)
+                d.rounded_rectangle([x0, y0, x1, y1], radius=8, outline=RED, width=5 if EDGE else 4)
         d.rectangle([0, H - CAP_H, W, H], fill=BLACK)
         txt = seg.get('caption') or seg['spoken']
         for a, b in fixes.items():

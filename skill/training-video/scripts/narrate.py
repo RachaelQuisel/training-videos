@@ -18,8 +18,13 @@ DEFAULT_MODEL = "eleven_multilingual_v2"
 MAX_CHARS = 10000  # eleven_multilingual_v2 limit for one request
 
 
-def script_text(script):
-    return " ".join(s["spoken"].strip() for s in script["segments"])
+EXPRESSIVE_MODELS = ("eleven_v4", "eleven_v3")  # these read directions in square brackets, such as [warmly]
+
+
+def script_text(script, model=DEFAULT_MODEL):
+    """Join the lines to speak. On an expressive model, a segment's tts line is used when it has one."""
+    use_tts = model in EXPRESSIVE_MODELS
+    return " ".join((s.get("tts") if use_tts and s.get("tts") else s["spoken"]).strip() for s in script["segments"])
 
 
 def check_length(text, limit=MAX_CHARS):
@@ -68,7 +73,7 @@ def main():
     if args.command == "voices":
         list_voices(args.use_case)
         return
-    text = args.source if args.command == "clip" else script_text(json.load(open(args.source)))
+    text = args.source if args.command == "clip" else script_text(json.load(open(args.source)), args.model)
     try:
         generate(text, args.out, args.voice, args.model)
     except ValueError as e:

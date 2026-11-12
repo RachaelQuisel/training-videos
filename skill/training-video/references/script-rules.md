@@ -1,37 +1,75 @@
-# Script rules and the script.json format
+# Script rules and file formats
 
 ## Who is listening
 
-Staff who do not like software and read at about an 8th-grade level. They are capable adults doing hard work. The narrator is a calm coworker showing them where to click, not a presenter selling a product.
+The viewers do not work in software. Many do not like software. They are capable adults who do hard work.
+
+The narrator is a friendly coworker who shows them where to tap. The narrator is not selling anything.
 
 ## Tone
 
-- Plain words. One idea per sentence. Short sentences.
-- Address staff as coworkers. No hype, no pep talk, no jokes at their expense.
-- Words that do not belong: "master," "listen up," "listen closely," "pro tip," "golden rule," "boom," "I cannot stress this enough," "you guessed it," "pay attention," "crush," "supercharge."
-- Say the one rule that matters most twice: once near the start, once at the step where it applies. Repetition is the one thing a hype-free script can borrow from sales videos, because it works.
-- Do not add rules the app or the guide does not have. If the app lets you skip a note, the script does not say a note is required.
-- When no password is needed, the first step is "open the page," not "log in." Staff who hear "log in" look for a login screen.
+- Use plain words.
+- Put one idea in each sentence.
+- Keep sentences short.
+- Speak to viewers as coworkers.
+- Use contractions.
+- Start with the first useful sentence.
+- Ask the viewer a short question now and then. Example: "Found a day you like? Tap the card."
+- Do not use hype, pep talk, or jokes about the viewer.
+- Do not use these words: "master," "listen up," "listen closely," "pro tip," "golden rule," "boom," "I cannot stress this enough," "you guessed it," "pay attention," "crush," "supercharge."
+- Say the most important rule twice. Say it once near the start and once at the step where it applies.
+- Do not add a rule that the app does not have. If the app lets a person skip a note, do not say the note is required.
+- When the app has no password, say "open the page." Do not say "log in." A viewer who hears "log in" looks for a login screen.
+- A script can be accurate and still dull. The first La Maison cut said only true things, and it was dry. Check the tone before you pay for a voice.
 
-## Segment shape
+## Segments
 
-- 8 to 25 words per segment. Each segment maps to one screen state and, usually, one highlight.
-- A segment that names a button gets that button highlighted. A segment that explains a concept gets no highlight.
-- Order: title, the key rule, open the app, one section per task in the order staff do them, errors and what to do, the export or final step, privacy, end card.
-- Target 4 to 8 minutes. At a calm pace that is roughly 450 to 900 spoken words.
+- Each segment has 8 to 25 words.
+- Each segment shows one screen and usually one highlight.
+- A segment that names a button highlights that button.
+- A segment that explains an idea has no highlight.
+- Put the segments in this order:
+  1. the tabs or the first screen
+  2. one section for each task, in the order people do them
+  3. what to do when something goes wrong
+  4. the last step
+  5. the end card
+- A title card and a rule card are optional. Use them when the user wants them.
 
-## Pronunciation (spoken text only; captions keep normal spelling)
+## Length
 
-Text-to-speech voices read letters and numbers in unexpected ways. These spellings make them read correctly:
+Estimate the length from the word count. Do not estimate it from the test clip. A short clip is read slowly, and a full script is read faster.
 
-- Acronyms as letters with periods: `L.M.` for LM
-- Large numbers as words: `seventy-six items in thirteen groups`
-- Web addresses letter by letter with commas: `5, x, v, h, z, k, f, u, j, h, dot zite dot so`
-- Phone numbers as digit groups: `8 0 5, 5 5 5, 0 1 4 2`
-- `N slash A` for N/A
-- Product names the voice stumbles on get a spoken fix: ElevenLabs reads "Airtable" correctly; the local piper voice needs "Air table".
+| Model | Words per minute | Words for 6 minutes |
+|---|---|---|
+| `eleven_multilingual_v2` (standard) | about 145 | about 870 |
+| `eleven_v4` (expressive) | about 175 | about 1,050 |
 
-`caption_fixes` in script.json turns the spoken spellings back into normal text for the caption bar.
+These rates come from the Claire voice reading full scripts.
+
+## Pronunciation on the standard model
+
+These rules apply to the spoken text on `eleven_multilingual_v2`. Captions keep normal spelling.
+
+- Write an acronym as letters with periods: `L.M.` for LM.
+- Write a large number as words: `seventy-six items in thirteen groups`.
+- Write a web address letter by letter with commas: `5, x, v, h, z, k, f, u, j, h, dot zite dot so`.
+- Write a phone number as digit groups: `8 0 5, 5 5 5, 0 1 4 2`.
+- Write `N slash A` for N/A.
+
+`caption_fixes` in `script.json` changes these spellings back to normal text in the caption bar.
+
+## The expressive model
+
+These rules apply on `eleven_v4`.
+
+- Write numbers as digits.
+- Do not use the spellings from the section above.
+- Add a `tts` field to a segment when you want to direct the voice.
+- The `tts` field holds the spoken line with a direction in square brackets in front. Examples: `[warmly]`, `[happy]`, `[curious]`.
+- A direction applies until the next direction. Put one at the start of each section, not on every line.
+- Keep `spoken` free of brackets. It is the caption text, and the timing step matches it to the audio.
+- `narrate.py` sends the `tts` line when you run it with `--model eleven_v4`.
 
 ## script.json
 
@@ -39,27 +77,25 @@ Text-to-speech voices read letters and numbers in unexpected ways. These spellin
 {
   "title": "How to Use the La Maison Scheduling Page",
   "subtitle": "For La Maison cleaners and property inspectors",
-  "end_title": "Thank you for taking care of La Maison.",
+  "end_title": "Thank you for taking such good care of La Maison.",
   "end_subtitle": "Questions? Open the Help tab.",
-  "caption_fixes": {"seventy-six": "76", "thirteen": "13", "N slash A": "N/A"},
-  "spoken_fixes": {"Airtable": "Air table"},
+  "caption_fixes": {},
   "extra_boxes": {"step2": {"x": 789, "y": 232, "width": 43, "height": 43}},
   "segments": [
-    {"spoken": "This video shows La Maison cleaners and inspectors how to use the scheduling page.", "caption": null, "screen": "TITLE", "highlights": []},
-    {"spoken": "Checking a date is not enough. Your name goes on the calendar only after you tap Sign me up.", "caption": null, "screen": "RULE", "highlights": []},
-    {"spoken": "To start, open your own link in your web browser. Each person gets their own link. You do not need a password.", "caption": "Open your own link. No password needed.", "screen": "home", "highlights": []},
-    {"spoken": "To pick a date, tap its card. A check mark appears and the card turns green.", "caption": null, "screen": "checked", "highlights": ["card_checked"]},
-    {"spoken": "Then tap Sign me up at the bottom. This step puts your name on the La Maison calendar.", "caption": null, "screen": "checked", "highlights": ["signup"]},
-    {"spoken": "The list has seventy-six items in thirteen groups, such as Bathroom, Kitchen, and Living Areas.", "caption": null, "screen": "tasks_sections", "highlights": []},
-    {"spoken": "Thank you for taking care of La Maison.", "caption": null, "screen": "END", "highlights": []}
+    {"spoken": "There are five tabs across the top: My dates, Tasks, Supplies, Contractors, and Help. Here's what each one does for you.", "tts": "[warmly] There are five tabs across the top: My dates, Tasks, Supplies, Contractors, and Help. Here's what each one does for you.", "caption": null, "screen": "home", "highlights": ["tabs"]},
+    {"spoken": "Found a day you like? Tap the card. The box fills in with a check mark.", "tts": "[happy] Found a day you like? Tap the card. The box fills in with a check mark.", "caption": null, "screen": "checked", "highlights": ["card_checked"]},
+    {"spoken": "Now the important part: tap Sign me up. That tap puts your name on the La Maison calendar.", "tts": "[warmly] Now the important part: tap Sign me up. That tap puts your name on the La Maison calendar.", "caption": null, "screen": "checked", "highlights": ["signup"]},
+    {"spoken": "There are 76 items, sorted into 13 areas like Bathroom, Kitchen, and Living Areas.", "caption": null, "screen": "tasks_sections", "highlights": []},
+    {"spoken": "That's everything. Thank you for taking such good care of La Maison.", "caption": null, "screen": "END", "highlights": []}
   ]
 }
 ```
 
-- `screen` is a file name in frames/ without .png, or TITLE, RULE, END.
-- `caption` null means the caption bar shows the spoken text (after caption_fixes).
-- `highlights` are keys from boxes.json or extra_boxes. Add extra_boxes by hand when a target was not measured (a column header, a step line), using viewport pixels read off the frame.
-- `spoken_fixes` apply only in the piper fallback.
+- `screen` is a file name in `frames/` without `.png`. It can also be TITLE, RULE, or END.
+- `caption` set to null means the caption bar shows the spoken text.
+- `highlights` are keys from `boxes.json` or `extra_boxes`.
+- Add a key to `extra_boxes` by hand when a target was not measured. Use pixel positions read from the 1280x720 frame.
+- `tts` is optional. Segments without it send their `spoken` text.
 
 ## brand.json
 
@@ -68,9 +104,21 @@ Text-to-speech voices read letters and numbers in unexpected ways. These spellin
   "red": "#F2B600",
   "black": "#1F3556",
   "category_label": "LA MAISON  |  SANTA BARBARA",
-  "logo": {"screen": "home", "box": [540, 38, 740, 96]},
+  "logo": {"screen": "home", "box": [535, 40, 750, 95]},
+  "edge": "#1F3556",
+  "label_color": "#6B7280",
   "stripe": true
 }
 ```
 
-`red` is the highlight color and `black` is the caption bar and title color; take both from the brand guide when there is one. The logo is cropped from a captured frame (box is left, top, right, bottom in viewport pixels), so the cards use the same logo the app shows. When there is no guide, ask for colors: La Maison had none and Rachael named navy, grey, white, and yellow, so the highlight is yellow and the caption bar is navy. Check the highlight against the app's background before building; yellow on La Maison's cream background needed a thin navy edge to stay visible.
+- `red` is the color of the highlight box.
+- `black` is the color of the caption bar and the titles.
+- `category_label` is the small label on the cards.
+- `logo` is cropped from a captured frame. `box` is left, top, right, bottom in pixels.
+- `edge` is optional. It draws a thin outline around each highlight box.
+- `label_color` is optional. It sets the color of the small label on the cards.
+- `stripe` draws a colored line across the top of each card.
+
+Take the colors from the brand guide when there is one. Ask the user for colors when there is none. La Maison had no guide, and Rachael named navy, grey, white, and yellow.
+
+Check the highlight color against the app's background before you build. A yellow box on La Maison's light background was hard to see. A navy `edge` fixed that.
