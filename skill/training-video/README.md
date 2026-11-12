@@ -8,6 +8,6 @@ Before writing the script, the assistant lists every tab and main button in the 
 
 For a finished example, watch the [La Maison app walk-through](https://github.com/RachaelQuisel/training-videos/blob/main/la-maison-scheduling-page-2026-11-11/LaMaison-App-Walk-through-Video.mp4), a video of a Zite scheduling app for cleaners and property inspectors.
 
-The working instructions are in [SKILL.md](SKILL.md). The bundled scripts help capture screens, build slides, align narration, assemble the video, and check the result. The instructions describe the software and account connections each route needs.
+The working instructions are in [SKILL.md](SKILL.md). The bundled scripts help capture screens, build slides, align narration, assemble the video, and check the result. The instructions describe the software and account connections each route needs. Narration uses an ElevenLabs API key that you store on your own computer, outside this folder; the skill contains no key, so each person who installs it supplies their own.
 
 RachaelQuisel maintains this skill. Its files are registered in the repository's maintenance inventory. The scheduled maintenance check does not run a complete video build or verify voice-service access. Those capabilities remain unverified by that check.

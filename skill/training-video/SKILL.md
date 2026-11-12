@@ -1,7 +1,7 @@
 ---
 name: training-video
 description: Make a narrated how-to video of a web app from real screenshots. Plain-language script, red highlights on each button, captions, an ElevenLabs voice synced to every slide, and a self-check before delivery. Use whenever Rachael types /training-video, asks for a training video, how-to video, walkthrough, explainer, screen recording, or onboarding video of an app, dashboard, Zite interface, or Airtable interface, or wants to replace a NotebookLM video. Use it even when she only says "make a video of this."
-compatibility: Needs the sandbox shell with Playwright and Chromium, ffmpeg, pdftoppm, Python with Pillow and faster-whisper, the voice-align skill, and the ElevenLabs connector (creative_list_voices, creative_generate_speech, creative_get_flow_run_status). The piper fallback needs pip and a one-time 110 MB voice download.
+compatibility: Needs the sandbox shell with Playwright and Chromium, ffmpeg, pdftoppm, Python with Pillow and faster-whisper, the voice-align skill, and for narration either an ElevenLabs API key in ~/.config/elevenlabs/.env.local with the packages in requirements.txt (elevenlabs, python-dotenv), or the ElevenLabs connector (creative_list_voices, creative_generate_speech, creative_get_flow_run_status). The piper fallback needs pip and a one-time 110 MB voice download.
 ---
 
 # Training video
@@ -54,12 +54,14 @@ Copy `scripts/capture_template.js`, fill in the URL and the click-through, and r
 
 ## Step 4: Narration
 
-ElevenLabs, preferred:
+ElevenLabs, preferred. Use `scripts/narrate.py`, which makes speech with the ElevenLabs API key stored on this computer at `~/.config/elevenlabs/.env.local`. The key file stays outside this skill folder because this folder is published to GitHub; never copy the key, or the key file, into the skill or into a video's project folder. Setup on a new computer: `pip install -r requirements.txt`, then `npx -y @elevenlabs/cli@latest onboard connect --env-path ~/.config/elevenlabs/.env.local`.
 
-1. `creative_list_voices` with use_cases informative_educational. Claire ("E-Learning & Corporate Training", voice id umwdC76NumBsGtudno3p) worked well for staff training.
-2. Run one short test clip with generations_count 1 first, and make its text a sentence or two containing every proper noun in the script (app name, client name, people, tools, acronyms). This one clip does two jobs. A blocked account ("Free Tier access has been disabled") fails for a few credits instead of thousands; if it fails, stop and tell her, because she may need to sign in or upgrade. And transcribing the clip with faster-whisper shows names the voice reads wrong (Airtable has been transcribed as "irritable") while a fix is still cheap: change the spelling in the spoken text per `references/script-rules.md`. If a spelling changed, one more short clip to confirm it is fine, since the text is different.
-3. Join every segment's spoken text into one prompt and call `creative_generate_speech` with model eleven_multilingual_v2 and generations_count 1. Poll `creative_get_flow_run_status` every 45 to 60 seconds until completed. Download content_url with curl to narration.mp3. Record credits used for the report.
-4. Each call charges. Do not call creative_generate_speech a second time to retry the same text.
+1. `python3 scripts/narrate.py voices --use-case informative_educational` lists voice ids and names. Claire ("E-Learning & Corporate Training", voice id umwdC76NumBsGtudno3p) worked well for staff training and is the default voice.
+2. Run one short test clip first: `python3 scripts/narrate.py clip "<text>" test.mp3`. Make its text a sentence or two containing every proper noun in the script (app name, client name, people, tools, acronyms). This one clip does two jobs. A blocked account ("Free Tier access has been disabled") fails for a few credits instead of thousands; if it fails, stop and tell her, because she may need to sign in or upgrade. And transcribing the clip with faster-whisper shows names the voice reads wrong (Airtable has been transcribed as "irritable") while a fix is still cheap: change the spelling in the spoken text per `references/script-rules.md`. If a spelling changed, one more short clip to confirm it is fine, since the text is different.
+3. `python3 scripts/narrate.py script script.json narration.mp3` joins every segment's spoken text and makes the full narration in one request with model eleven_multilingual_v2. Add `--voice <id>` for a voice other than Claire. It prints the credits charged; record them for the report. One request takes at most 10,000 characters, about 12 minutes of speech; the script stops before spending credits if the text is longer.
+4. Each clip and script call charges. Do not run one a second time to retry the same text.
+
+If the key file does not exist and she does not want to create one, use the ElevenLabs connector instead: `creative_list_voices` with use_cases informative_educational, a test clip and then the full text through `creative_generate_speech` with model eleven_multilingual_v2 and generations_count 1, polling `creative_get_flow_run_status` every 45 to 60 seconds until completed, then download content_url with curl to narration.mp3. The same rules apply: test clip first, record credits, no second call for the same text.
 
 Fallback when ElevenLabs is blocked and she agrees: `pip install --break-system-packages piper-tts`, download en_US-lessac-high.onnx and .onnx.json from huggingface.co/rhasspy/piper-voices (en/en_US/lessac/high) in the background, then skip to `scripts/piper_build.py` after Step 5. It builds one clip per segment, so no alignment is needed. The voice is flatter than ElevenLabs; say so.
 
@@ -94,7 +96,7 @@ Read the transcript it prints for mispronounced names (Airtable heard as "irrita
 If a name or a line is wrong, regenerate only that segment, not the whole narration:
 
 1. Fix the spelling in that segment's spoken text in script.json.
-2. Generate that one segment's text as its own clip (same voice, same model, generations_count 1).
+2. Generate that one segment's text as its own clip with `python3 scripts/narrate.py clip "<text>" fix.mp3` (same voice, same model).
 3. Cut the old segment out of narration.mp3 at the start and end times in seg/boundaries.json, put the new clip in its place with ffmpeg, and rerun align_narration.py and assemble.sh.
 4. Rerun verify.py and listen to the sentence before and after the replaced segment; the voice level and pace can differ between calls. If the join is audible, say so in the report.
 
@@ -113,4 +115,5 @@ Regenerate the full narration only when more than about a third of the segments 
 - The Chrome extension can fail mid-session; Playwright in the sandbox is the reliable capture path for public apps.
 - faster-whisper's file loader breaks with the installed av version. The scripts read the WAV with wave and numpy for that reason; keep that when editing them.
 - Keep each shell step under the tool timeout: run voice-model downloads and pip installs in the background, and split long ffmpeg or whisper jobs.
+- `scripts/elevenlabs_client.py` passes the key to the ElevenLabs client itself. The SDK reads the environment when it is imported, before the key file is loaded, so a client created with no key sends no key and every request fails with a 401. Keep that when editing it.
 - The Chrome and ElevenLabs connectors can disconnect mid-session. If a tool vanishes, say so and continue with the fallback rather than retrying blindly.

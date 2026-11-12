@@ -100,7 +100,7 @@ The first video made this way is the La Maison app walk-through: 4 minutes 28 se
 
 **Brand comes from the app.** Colors are taken from a brand guide when there is one, and asked for when there is not. The logo on the title and end cards is cropped from a captured screen, so it is always the logo the app shows.
 
-**Everything is kept.** The script, screenshots, highlight positions, narration, and the capture script are saved beside the video. Earlier cuts are kept in their own folders.
+**Everything is kept.** The script, screenshots, highlight positions, narration, and the capture script are saved beside the video.
 
 **Integrations.** Zite hosts the example app. ElevenLabs provides the narration. Playwright with Chromium captures the screens. faster-whisper transcribes for timing and checking. ffmpeg and Pillow build the slides and the video. When an app sits on an Airtable base, the Airtable connector supplies field options and statuses. Claude Code runs the skill. A free local voice is the fallback when the voice service is unavailable.
 
