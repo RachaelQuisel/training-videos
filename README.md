@@ -87,6 +87,10 @@ The La Maison video shows the app as my team sees it, with first names of our cl
 
 Narration uses your ElevenLabs credits, about one credit per character. The La Maison narration used about 4,250.
 
+## How it was designed
+
+The [product requirements](docs/prd.md) cover the problem, 35 user stories, the decisions behind the build, how it is checked, and what I learned making three cuts of the first video in one day.
+
 ## Help and details
 
 Maintained by Rachael Quisel. [Ask a question or report a problem](https://github.com/RachaelQuisel/training-videos/issues).
