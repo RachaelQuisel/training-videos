@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Maison app walk-through</title>
+<meta name="description" content="A narrated how-to video built from an app's real screens, with a transcript you can click through.">
+<style>
+:root{--navy:#1F3556;--navy2:#2c4a75;--yellow:#F2B600;--ink:#1b2738;--grey:#667085;--line:#e4e7ec;--bg:#ffffff;--soft:#f6f7f9;--card:#ffffff;--hl:#fff6d6}
+@media (prefers-color-scheme:dark){:root{--ink:#eef1f6;--grey:#a3adbd;--line:#2b3850;--bg:#0f1826;--soft:#16233a;--card:#16233a;--hl:#3a3415;--navy2:#8fb0e6}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+.bar{height:6px;background:linear-gradient(90deg,var(--yellow) 0 55%,var(--navy))}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{padding:36px 0 22px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--grey);text-transform:uppercase}
+h1{font-size:clamp(28px,4.2vw,44px);line-height:1.12;margin:10px 0 12px;color:var(--navy);letter-spacing:-.01em}
+@media (prefers-color-scheme:dark){h1,h2{color:#fff !important}}
+.lede{font-size:18px;color:var(--grey);max-width:760px;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0;padding:0;list-style:none}
+.stats li{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:132px}
+.stats b{display:block;font-size:22px;color:var(--navy);line-height:1.2}
+@media (prefers-color-scheme:dark){.stats b{color:var(--yellow)}}
+.stats span{font-size:13px;color:var(--grey)}
+.stage{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);gap:20px;align-items:start;margin:18px 0 8px}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+video{width:100%;display:block;border-radius:14px;border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+.chapters{display:flex;gap:3px;margin-top:10px;height:46px}
+.chapters button{all:unset;cursor:pointer;position:relative;background:var(--soft);border:1px solid var(--line);border-radius:8px;overflow:hidden;min-width:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.chapters button:hover{border-color:var(--navy2)}
+.chapters button:focus-visible,.line:focus-visible,.pill:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.chapters .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--yellow);opacity:.45}
+.chapters .lbl{position:relative;padding:0 6px;overflow:hidden;text-overflow:ellipsis}
+.chapters button.on{border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--navy)}
+.keys{font-size:13px;color:var(--grey);margin:10px 2px 0}
+kbd{font:12px ui-monospace,Menlo,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--soft)}
+.panel{border:1px solid var(--line);border-radius:14px;background:var(--card);display:flex;flex-direction:column;height:min(62vh,560px)}
+@media (max-width:900px){.panel{height:420px}}
+.panel-head{padding:12px 12px 10px;border-bottom:1px solid var(--line)}
+.panel-head label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.search{width:100%;margin-top:8px;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.count{font-size:12px;color:var(--grey);margin-top:6px;min-height:16px}
+.lines{overflow:auto;padding:6px;scroll-behavior:smooth}
+.chap{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);padding:12px 10px 4px}
+.line{all:unset;display:grid;grid-template-columns:44px 1fr;gap:8px;padding:8px 10px;border-radius:9px;cursor:pointer;width:100%;box-sizing:border-box;font-size:14.5px;line-height:1.45}
+.line:hover{background:var(--soft)}
+.line time{font:12px ui-monospace,Menlo,monospace;color:var(--grey);padding-top:2px}
+.line.on{background:var(--hl);box-shadow:inset 3px 0 0 var(--yellow)}
+.line.on time{color:var(--ink)}
+.line[hidden]{display:none}
+mark{background:var(--yellow);color:#1b2738;border-radius:3px;padding:0 1px}
+section{padding:38px 0 6px}
+h2{font-size:24px;color:var(--navy);margin:0 0 6px}
+.sub{color:var(--grey);margin:0 0 18px;max-width:760px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{counter-increment:s;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--card)}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;margin-bottom:8px}
+.steps b{display:block;margin-bottom:2px}
+.steps span{color:var(--grey);font-size:14.5px}
+.compare{position:relative;max-width:900px;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#eee;user-select:none;touch-action:pan-y}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.compare .after{clip-path:inset(0 0 0 var(--x,50%))}
+.compare .handle{position:absolute;top:0;bottom:0;left:var(--x,50%);width:3px;background:var(--yellow);transform:translateX(-1.5px);pointer-events:none}
+.compare .handle::after{content:"";position:absolute;top:50%;left:50%;width:38px;height:38px;transform:translate(-50%,-50%);border-radius:50%;background:var(--navy);border:3px solid var(--yellow)}
+.compare input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.tag{position:absolute;top:12px;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;background:rgba(31,53,86,.92);color:#fff;pointer-events:none}
+.tag.l{left:12px}.tag.r{right:12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;padding:0;margin:0;list-style:none}
+.facts li{border-left:4px solid var(--yellow);background:var(--soft);border-radius:0 12px 12px 0;padding:12px 14px}
+.facts b{font-size:20px;color:var(--navy);display:block}
+@media (prefers-color-scheme:dark){.facts b{color:#fff}}
+.facts span{color:var(--grey);font-size:14.5px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.pill{display:inline-block;padding:10px 16px;border-radius:999px;border:1px solid var(--navy);color:var(--navy);text-decoration:none;font-weight:600}
+.pill.solid{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){.pill{border-color:var(--navy2);color:#fff}.pill.solid{background:var(--yellow);color:#1b2738;border-color:var(--yellow)}}
+footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<div class="wrap">
+<header>
+  <div class="eyebrow">La Maison · Santa Barbara</div>
+  <h1>A how-to video built from an app's real screens</h1>
+  <p class="lede">La Maison's scheduling app is built on Zite. This walk-through shows cleaners and property inspectors every tab before their first day. Click any line of the transcript to jump to it.</p>
+  <ul class="stats">
+    <li><b>4:28</b><span>start to finish</span></li>
+    <li><b>52</b><span>slides, one idea each</span></li>
+    <li><b>5</b><span>tabs, none left out</span></li>
+    <li><b>0</b><span>records saved to the app during capture</span></li>
+  </ul>
+</header>
+
+<div class="stage">
+  <div>
+    <video id="v" controls preload="metadata" playsinline poster="__V__/preview.jpg">
+      <source src="__V__/__FILE__" type="video/mp4">
+      <track kind="captions" src="__V__/captions.vtt" srclang="en" label="English">
+    </video>
+    <div class="chapters" id="chapters" role="group" aria-label="Chapters"></div>
+    <p class="keys"><kbd>Space</kbd> play or pause · <kbd>↑</kbd> <kbd>↓</kbd> previous or next line · <kbd>1</kbd> to <kbd>5</kbd> jump to a tab · <kbd>/</kbd> search</p>
+  </div>
+  <aside class="panel" aria-label="Transcript">
+    <div class="panel-head">
+      <label for="q">Transcript</label>
+      <input class="search" id="q" type="search" placeholder="Find a step, like “uncheck” or “supplies”" autocomplete="off">
+      <div class="count" id="count" aria-live="polite"></div>
+    </div>
+    <div class="lines" id="lines"></div>
+  </aside>
+</div>
+
+<section>
+  <h2>How it gets made</h2>
+  <p class="sub">One command in Claude Code and a link to the app. The skill does the rest and reports what it checked.</p>
+  <ol class="steps">
+    <li><b>Read the live app</b><span>Every tab and button is listed first, so the script covers the whole app.</span></li>
+    <li><b>Write the script</b><span>Plain English, one idea per slide, approved before anything costs money.</span></li>
+    <li><b>Capture the screens</b><span>Requests that would save data are blocked. Buttons that write are never pressed.</span></li>
+    <li><b>Test the voice</b><span>One short clip with every name in it, before the full narration is bought.</span></li>
+    <li><b>Build the slides</b><span>A yellow box drawn from the measured position of each button, plus a caption.</span></li>
+    <li><b>Time it to the voice</b><span>Every spoken word gets a timestamp, and each slide lands just before its first word.</span></li>
+    <li><b>Check the result</b><span>The finished audio is transcribed and compared to the script, and frames are pulled to match.</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>The app changed while the video was being made</h2>
+  <p class="sub">Between the afternoon and the evening, the app was redesigned and reworded. The skill re-reads the app before each cut, so it found the change, recaptured all 28 screens, and corrected the script. Drag to compare.</p>
+  <div class="compare" id="cmp">
+    <img src="__V__/v2-short-cut/frames/home.png" alt="The app in the afternoon: green tabs, orange logo, cream background">
+    <img class="after" src="__V__/frames/home.png" alt="The app in the evening: navy tabs, navy logo, white background, a welcome message">
+    <span class="tag l">Afternoon</span><span class="tag r">Evening</span>
+    <div class="handle"></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Compare the afternoon and evening screens">
+  </div>
+</section>
+
+<section>
+  <h2>Checked, with the numbers</h2>
+  <ul class="facts">
+    <li><b>783 of 791</b><span>script words matched to the audio for slide timing</span></li>
+    <li><b>4 of 4</b><span>times the app's name was confirmed as spoken correctly</span></li>
+    <li><b>43</b><span>button positions measured on screen, none drawn by hand</span></li>
+    <li><b>0</b><span>save requests attempted across every capture run</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>See the rest</h2>
+  <ul class="pills">
+    <li><a class="pill solid" href="https://5xvhzkfujh.zite.so">Open the La Maison app</a></li>
+    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos">The repository</a></li>
+    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/tree/main/skill/training-video">The skill</a></li>
+    <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/blob/main/docs/prd.md">The product requirements</a></li>
+  </ul>
+</section>
+<footer>Made by Rachael Quisel. This page is generated from the same script file that built the video.</footer>
+</div>
+
+<script>
+const D = __DATA__;
+const v = document.getElementById('v'), box = document.getElementById('lines'), q = document.getElementById('q'), count = document.getElementById('count'), chBox = document.getElementById('chapters');
+const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const seek = t => { v.currentTime = t + 0.05; v.play().catch(() => {}); };
+
+// chapters bar, each button as wide as its share of the video
+const chEnds = D.chapters.map((c, i) => i + 1 < D.chapters.length ? D.chapters[i + 1].start : D.total);
+const chBtns = D.chapters.map((c, i) => {
+  const b = document.createElement('button');
+  b.style.flex = (chEnds[i] - c.start) + ' 1 0';
+  b.title = c.name + ' · ' + fmt(c.start);
+  b.innerHTML = '<span class="fill"></span><span class="lbl">' + esc(c.name) + '</span>';
+  b.addEventListener('click', () => seek(c.start));
+  chBox.appendChild(b); return b;
+});
+
+// transcript
+const firsts = new Map(D.chapters.map(c => [c.first, c.name]));
+const heads = [];
+const btns = D.lines.map((l, i) => {
+  if (firsts.has(i)) { const h = document.createElement('div'); h.className = 'chap'; h.textContent = firsts.get(i); box.appendChild(h); heads.push(h); }
+  const b = document.createElement('button');
+  b.className = 'line'; b.dataset.i = i;
+  b.innerHTML = '<time>' + fmt(l.t) + '</time><span>' + esc(l.text) + '</span>';
+  b.addEventListener('click', () => seek(l.t));
+  box.appendChild(b); return b;
+});
+
+let cur = -1;
+function indexAt(t) { let lo = 0, hi = D.lines.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (D.lines[m].t <= t) lo = m; else hi = m - 1; } return lo; }
+function tick() {
+  const t = v.currentTime, i = indexAt(t);
+  if (i !== cur) {
+    if (cur >= 0) btns[cur].classList.remove('on');
+    btns[i].classList.add('on'); cur = i;
+    if (!q.value) { const el = btns[i]; box.scrollTo({ top: el.offsetTop - box.offsetTop - box.clientHeight / 2 + el.clientHeight / 2 }); }
+  }
+  chBtns.forEach((b, k) => {
+    const s = D.chapters[k].start, e = chEnds[k];
+    b.classList.toggle('on', t >= s && t < e);
+    b.firstChild.style.width = (Math.max(0, Math.min(1, (t - s) / (e - s))) * 100) + '%';
+  });
+}
+v.addEventListener('timeupdate', tick); v.addEventListener('seeked', tick); tick();
+
+// search
+q.addEventListener('input', () => {
+  const term = q.value.trim().toLowerCase(); let n = 0;
+  btns.forEach((b, i) => {
+    const text = D.lines[i].text, at = term ? text.toLowerCase().indexOf(term) : 0, hit = at >= 0;
+    b.hidden = !hit; if (hit) n++;
+    b.lastChild.innerHTML = term && hit ? esc(text.slice(0, at)) + '<mark>' + esc(text.slice(at, at + term.length)) + '</mark>' + esc(text.slice(at + term.length)) : esc(text);
+  });
+  heads.forEach(h => h.hidden = !!term);
+  count.textContent = term ? (n === 1 ? '1 line' : n + ' lines') + ' mention “' + q.value.trim() + '”' : '';
+});
+
+// keyboard
+document.addEventListener('keydown', e => {
+  const typing = document.activeElement === q;
+  if (e.key === '/' && !typing) { e.preventDefault(); q.focus(); return; }
+  if (e.key === 'Escape' && typing) { q.value = ''; q.dispatchEvent(new Event('input')); q.blur(); return; }
+  if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === ' ' && document.activeElement !== v && document.activeElement.tagName !== 'BUTTON') { e.preventDefault(); v.paused ? v.play() : v.pause(); }
+  else if (e.key === 'ArrowDown') { e.preventDefault(); seek(D.lines[Math.min(D.lines.length - 1, cur + 1)].t); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); seek(D.lines[Math.max(0, cur - 1)].t); }
+  else if (/^[1-5]$/.test(e.key)) { seek(D.chapters[+e.key - 1].start); }
+});
+
+// before and after slider
+const cmp = document.getElementById('cmp'), rng = cmp.querySelector('input');
+rng.addEventListener('input', () => cmp.style.setProperty('--x', rng.value + '%'));
+</script>
+</body>
+</html>
