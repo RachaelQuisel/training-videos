@@ -1,0 +1,15 @@
+{
+ "red": "#F2B600",
+ "black": "#1F3556",
+ "category_label": "LA MAISON  |  SANTA BARBARA",
+ "logo": {
+  "screen": "home",
+  "box": [
+   535,
+   40,
+   750,
+   95
+  ]
+ },
+ "stripe": true
+}

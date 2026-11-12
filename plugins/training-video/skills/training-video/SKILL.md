@@ -18,11 +18,10 @@ This skill only reads the app and makes the video. It does not edit, publish, or
 
 Read `references/script-rules.md` before you write the script. It holds the tone rules, the pronunciation spellings, and the file formats the scripts read.
 
-Example: the La Maison app walk-through shows a Zite scheduling app for cleaners and property inspectors. It runs 4 minutes 28 seconds with the Claire voice on `eleven_v4`.
+Example: `examples/la-maison/` holds the finished files from a real build. The app is a Zite scheduling app for cleaners and property inspectors. Read `examples/la-maison/README.md` first. It describes the app, the video, and each file.
 
-- Watch it: https://rachaelquisel.github.io/training-videos/
+- Watch the video: https://rachaelquisel.github.io/training-videos/
 - The video file: https://github.com/RachaelQuisel/training-videos/blob/main/la-maison-scheduling-page-2026-11-11/LaMaison-App-Walk-through-Video.mp4
-- The same folder holds its `script.json`, `frames/`, `boxes.json`, and capture script.
 
 ## Before building: ask once, then show the plan
 

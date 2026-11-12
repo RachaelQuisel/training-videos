@@ -1,0 +1,24 @@
+{
+  "name": "training-video",
+  "displayName": "Training Video",
+  "version": "1.0.0",
+  "description": "Make a narrated walk-through video of any web app. Real screenshots, a highlight on each button, captions, and a friendly voice, checked before delivery.",
+  "author": {
+    "name": "Rachael Quisel"
+  },
+  "homepage": "https://github.com/RachaelQuisel/training-videos",
+  "repository": "https://github.com/RachaelQuisel/training-videos",
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "training",
+    "walkthrough",
+    "onboarding",
+    "elevenlabs",
+    "zite"
+  ],
+  "icon": "./icon.png",
+  "documentationUrl": "https://github.com/RachaelQuisel/training-videos#readme",
+  "privacyPolicyUrl": "https://github.com/RachaelQuisel/training-videos/blob/main/plugins/training-video/PRIVACY.md",
+  "supportUrl": "https://github.com/RachaelQuisel/training-videos/issues"
+}

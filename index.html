@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La Maison app walk-through</title>
-<meta name="description" content="A narrated how-to video built from an app's real screens, with a transcript you can click through.">
+<title>Training Video: a Claude Code plugin</title>
+<meta name="description" content="A Claude Code plugin that makes a narrated walk-through video of any web app from its real screens.">
 <style>
 :root{--navy:#1F3556;--navy2:#2c4a75;--yellow:#F2B600;--ink:#1b2738;--grey:#667085;--line:#e4e7ec;--bg:#ffffff;--soft:#f6f7f9;--card:#ffffff;--hl:#fff6d6}
 @media (prefers-color-scheme:dark){:root{--ink:#eef1f6;--grey:#a3adbd;--line:#2b3850;--bg:#0f1826;--soft:#16233a;--card:#16233a;--hl:#3a3415;--navy2:#8fb0e6}}
@@ -82,13 +82,14 @@ footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
 <div class="bar"></div>
 <div class="wrap">
 <header>
-  <div class="eyebrow">La Maison · Santa Barbara</div>
-  <h1>A how-to video built from an app's real screens</h1>
-  <p class="lede">La Maison's scheduling app is built on Zite. This walk-through shows cleaners and property inspectors every tab before their first day. Click any line of the transcript to jump to it.</p>
+  <div class="eyebrow">A Claude Code plugin by Rachael Quisel</div>
+  <h1>A plugin that makes a walk-through video of any web app</h1>
+  <p class="lede">Give it a link. It reads the app, writes the script, takes real screenshots, and narrates them. The video below is one it made for La Maison's scheduling app, which is built on Zite. Click any line of the transcript to jump to it.</p>
   <ul class="pills" style="margin-top:18px">
-  <li><a class="pill solid" href="https://5xvhzkfujh.zite.so">Open the La Maison app</a></li>
+  <li><a class="pill solid" href="https://github.com/RachaelQuisel/training-videos#install">Get the plugin</a></li>
+    <li><a class="pill" href="https://5xvhzkfujh.zite.so">The La Maison app</a></li>
   <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos">The repository</a></li>
-  <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/tree/main/skill/training-video">The skill</a></li>
+  <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/blob/main/plugins/training-video/skills/training-video/SKILL.md">How it works</a></li>
   <li><a class="pill" href="https://github.com/RachaelQuisel/training-videos/blob/main/docs/prd.md">The product requirements</a></li>
 </ul>
   <ul class="stats">
@@ -120,7 +121,7 @@ footer{color:var(--grey);font-size:14px;padding:34px 0 48px}
 
 <section>
   <h2>How it gets made</h2>
-  <p class="sub">One command in Claude Code and a link to the app. The skill does the rest and reports what it checked.</p>
+  <p class="sub">One command in Claude Code and a link to the app. The plugin does the rest and reports what it checked.</p>
   <ol class="steps">
     <li><b>Read the live app</b><span>Every tab and button is listed first, so the script covers the whole app.</span></li>
     <li><b>Write the script</b><span>Plain English, one idea per slide, approved before anything costs money.</span></li>

@@ -12,11 +12,13 @@ When I give someone a new app with no walkthrough, one of three things happens.
 - They guess. At La Maison, the costly guess is to check a date and leave. That looks like signing up, and it is not. The cleaning then has no cleaner.
 - They stop using the app. They go back to texting me their dates.
 
-I tried three ways to make a walkthrough. Each one failed.
+I tried an AI video tool that makes a video from a written guide. It failed in three ways.
 
-- **A screen recording.** It takes me an hour. I stumble. It is out of date the next time I change the app, and my apps change often.
-- **An AI video summary of a written guide.** The slides had no real screens. The script added hype such as "listen up." It stated rules that the app does not have. Each video took a full review to correct.
-- **A written guide with screenshots.** It is accurate. Nobody opens it.
+- The slides had no real screens.
+- The script added hype such as "listen up."
+- The script stated rules that the app does not have.
+
+Each video took a full review to correct.
 
 I wanted a video with five properties.
 

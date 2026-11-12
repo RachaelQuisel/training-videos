@@ -1,0 +1,461 @@
+{
+ "title": "How to Use the La Maison Scheduling Page",
+ "subtitle": "For La Maison cleaners and property inspectors",
+ "end_title": "Thank you for taking such good care of La Maison.",
+ "end_subtitle": "Questions? Open the Help tab.",
+ "caption_fixes": {},
+ "extra_boxes": {},
+ "segments": [
+  {
+   "spoken": "There are five tabs across the top: My dates, Tasks, Supplies, Contractors, and Help. Here's what each one does for you.",
+   "tts": "[warmly] There are five tabs across the top: My dates, Tasks, Supplies, Contractors, and Help. Here's what each one does for you.",
+   "caption": null,
+   "screen": "home",
+   "highlights": [
+    "tabs"
+   ]
+  },
+  {
+   "spoken": "The page says hello by name, and each tab starts with a short welcome and three quick steps.",
+   "tts": "The page says hello by name, and each tab starts with a short welcome and three quick steps.",
+   "caption": null,
+   "screen": "home",
+   "highlights": [
+    "greeting"
+   ]
+  },
+  {
+   "spoken": "Let's start with My dates. This is where you choose the days you'd like to work at La Maison.",
+   "tts": "[happy] Let's start with My dates. This is where you choose the days you'd like to work at La Maison.",
+   "caption": null,
+   "screen": "home",
+   "highlights": [
+    "tab_mydates"
+   ]
+  },
+  {
+   "spoken": "The yellow box lists the three steps to sign up. Here's how each one looks.",
+   "tts": "The yellow box lists the three steps to sign up. Here's how each one looks.",
+   "caption": null,
+   "screen": "howto",
+   "highlights": [
+    "howto"
+   ]
+  },
+  {
+   "spoken": "Every date gets its own card. A grey card with a lock means someone already has that day.",
+   "tts": "Every date gets its own card. A grey card with a lock means someone already has that day.",
+   "caption": null,
+   "screen": "taken",
+   "highlights": [
+    "card_taken"
+   ]
+  },
+  {
+   "spoken": "The card also shows the cleaner and the inspector for that day, so you know who you're working with.",
+   "tts": "The card also shows the cleaner and the inspector for that day, so you know who you're working with.",
+   "caption": null,
+   "screen": "taken",
+   "highlights": [
+    "card_taken"
+   ]
+  },
+  {
+   "spoken": "A white card with an empty box is open for you. The word Needed means that job is still available.",
+   "tts": "A white card with an empty box is open for you. The word Needed means that job is still available.",
+   "caption": null,
+   "screen": "open",
+   "highlights": [
+    "card_open"
+   ]
+  },
+  {
+   "spoken": "Each card gives you the date, the hours, and who else is working that day.",
+   "tts": "Each card gives you the date, the hours, and who else is working that day.",
+   "caption": null,
+   "screen": "open",
+   "highlights": [
+    "card_open"
+   ]
+  },
+  {
+   "spoken": "Some cards say same-day turnover, right next to the hours.",
+   "tts": "Some cards say same-day turnover, right next to the hours.",
+   "caption": null,
+   "screen": "sameday",
+   "highlights": [
+    "card_sameday"
+   ]
+  },
+  {
+   "spoken": "And some cards show only the checkout time, like this one.",
+   "tts": "And some cards show only the checkout time, like this one.",
+   "caption": null,
+   "screen": "sameday",
+   "highlights": [
+    "card_checkout"
+   ]
+  },
+  {
+   "spoken": "The dates run in order, soonest first. Keep scrolling to see the months ahead.",
+   "tts": "The dates run in order, soonest first. Keep scrolling to see the months ahead.",
+   "caption": null,
+   "screen": "sameday",
+   "highlights": []
+  },
+  {
+   "spoken": "Found a day you like? Tap the card. The box fills in with a check mark.",
+   "tts": "[happy] Found a day you like? Tap the card. The box fills in with a check mark.",
+   "caption": null,
+   "screen": "checked",
+   "highlights": [
+    "card_checked"
+   ]
+  },
+  {
+   "spoken": "Pick as many dates as you want, all in one visit.",
+   "tts": "Pick as many dates as you want, all in one visit.",
+   "caption": null,
+   "screen": "checked",
+   "highlights": [
+    "card_checked"
+   ]
+  },
+  {
+   "spoken": "Now the important part: tap Sign me up. That tap puts your name on the La Maison calendar.",
+   "tts": "[warmly] Now the important part: tap Sign me up. That tap puts your name on the La Maison calendar.",
+   "caption": null,
+   "screen": "checked",
+   "highlights": [
+    "signup"
+   ]
+  },
+  {
+   "spoken": "A check mark alone doesn't save your spot. If you leave without tapping Sign me up, the date stays open.",
+   "tts": "A check mark alone doesn't save your spot. If you leave without tapping Sign me up, the date stays open.",
+   "caption": null,
+   "screen": "checked",
+   "highlights": [
+    "signup"
+   ]
+  },
+  {
+   "spoken": "The Sign me up button waits at the bottom of the screen. It turns dark blue once you've changed a date.",
+   "tts": "The Sign me up button waits at the bottom of the screen. It turns dark blue once you've changed a date.",
+   "caption": null,
+   "screen": "open",
+   "highlights": [
+    "signup_off"
+   ]
+  },
+  {
+   "spoken": "Once you're signed up, your name shows on that day's calendar event, from checkout to check-in.",
+   "tts": "Once you're signed up, your name shows on that day's calendar event, from checkout to check-in.",
+   "caption": null,
+   "screen": "help_steps",
+   "highlights": [
+    "help_calendar"
+   ]
+  },
+  {
+   "spoken": "You'll also see a calendar with all of your dates on it.",
+   "tts": "You'll also see a calendar with all of your dates on it.",
+   "caption": null,
+   "screen": "home",
+   "highlights": [
+    "step2"
+   ]
+  },
+  {
+   "spoken": "Plans change, and that's fine. Uncheck the date, tap Sign me up again, and it opens up for someone else.",
+   "tts": "[warmly] Plans change, and that's fine. Uncheck the date, tap Sign me up again, and it opens up for someone else.",
+   "caption": null,
+   "screen": "help_cant",
+   "highlights": [
+    "help_cant"
+   ]
+  },
+  {
+   "spoken": "Inspectors, your link works the same way, with inspections in place of cleanings.",
+   "tts": "Inspectors, your link works the same way, with inspections in place of cleanings.",
+   "caption": null,
+   "screen": "insp_home",
+   "highlights": [
+    "insp_greeting"
+   ]
+  },
+  {
+   "spoken": "Your white cards are the dates that still need an inspection. You can also see who's cleaning that day.",
+   "tts": "Your white cards are the dates that still need an inspection. You can also see who's cleaning that day.",
+   "caption": null,
+   "screen": "insp_open",
+   "highlights": [
+    "insp_card_open"
+   ]
+  },
+  {
+   "spoken": "Cleaners and inspectors sign up separately, so one date can have both of you on it.",
+   "tts": "Cleaners and inspectors sign up separately, so one date can have both of you on it.",
+   "caption": null,
+   "screen": "insp_open",
+   "highlights": []
+  },
+  {
+   "spoken": "Next up, the Tasks tab. Inspectors, this is your checklist for every visit.",
+   "tts": "[happy] Next up, the Tasks tab. Inspectors, this is your checklist for every visit.",
+   "caption": null,
+   "screen": "tasks_top",
+   "highlights": [
+    "tab_tasks"
+   ]
+  },
+  {
+   "spoken": "The welcome box sums it up: open each area of the house, check off every item, then tap Submit.",
+   "tts": "The welcome box sums it up: open each area of the house, check off every item, then tap Submit.",
+   "caption": null,
+   "screen": "tasks_top",
+   "highlights": [
+    "tasks_welcome"
+   ]
+  },
+  {
+   "spoken": "Please go through the whole list every time, even if the house looked great last visit.",
+   "tts": "[warmly] Please go through the whole list every time, even if the house looked great last visit.",
+   "caption": null,
+   "screen": "tasks_note",
+   "highlights": [
+    "tasks_note"
+   ]
+  },
+  {
+   "spoken": "There are 76 items, sorted into 13 areas like Bathroom, Kitchen, and Living Areas.",
+   "tts": "There are 76 items, sorted into 13 areas like Bathroom, Kitchen, and Living Areas.",
+   "caption": null,
+   "screen": "tasks_sections",
+   "highlights": []
+  },
+  {
+   "spoken": "Tap an area to open it. The numbers on the right keep track of how far you've gotten.",
+   "tts": "Tap an area to open it. The numbers on the right keep track of how far you've gotten.",
+   "caption": null,
+   "screen": "tasks_open",
+   "highlights": [
+    "sec_bathroom"
+   ]
+  },
+  {
+   "spoken": "Each item is one small thing to check, like placing toilet paper in the cabinets over the toilets.",
+   "tts": "Each item is one small thing to check, like placing toilet paper in the cabinets over the toilets.",
+   "caption": null,
+   "screen": "tasks_open",
+   "highlights": []
+  },
+  {
+   "spoken": "Finished an item? Tap the box next to it.",
+   "tts": "Finished an item? Tap the box next to it.",
+   "caption": null,
+   "screen": "tasks_open",
+   "highlights": [
+    "item1_circle"
+   ]
+  },
+  {
+   "spoken": "Curious why an item is on the list? Tap Instructions and why it matters for the reason behind it.",
+   "tts": "[curious] Curious why an item is on the list? Tap Instructions and why it matters for the reason behind it.",
+   "caption": null,
+   "screen": "tasks_why",
+   "highlights": [
+    "item1_details"
+   ]
+  },
+  {
+   "spoken": "Finished items get a check mark and a line through them, and your count goes up.",
+   "tts": "[happy] Finished items get a check mark and a line through them, and your count goes up.",
+   "caption": null,
+   "screen": "tasks_checked",
+   "highlights": [
+    "item1_done"
+   ]
+  },
+  {
+   "spoken": "Tapped one by mistake? Tap it again to uncheck it.",
+   "tts": "Tapped one by mistake? Tap it again to uncheck it.",
+   "caption": null,
+   "screen": "tasks_checked",
+   "highlights": []
+  },
+  {
+   "spoken": "Then move on to the next area. The Kitchen has 10 items, from the coffee to the pots and pans.",
+   "tts": "Then move on to the next area. The Kitchen has 10 items, from the coffee to the pots and pans.",
+   "caption": null,
+   "screen": "tasks_kitchen",
+   "highlights": [
+    "sec_kitchen"
+   ]
+  },
+  {
+   "spoken": "At the bottom, you can see how many items you've completed.",
+   "tts": "At the bottom, you can see how many items you've completed.",
+   "caption": null,
+   "screen": "tasks_bottom",
+   "highlights": [
+    "count"
+   ]
+  },
+  {
+   "spoken": "All done? Tap Submit inspection, and your results are on their way to us.",
+   "tts": "[happy] All done? Tap Submit inspection, and your results are on their way to us.",
+   "caption": null,
+   "screen": "tasks_bottom",
+   "highlights": [
+    "submit"
+   ]
+  },
+  {
+   "spoken": "If you see a Your name box above the button, type your name first.",
+   "tts": "If you see a Your name box above the button, type your name first.",
+   "caption": null,
+   "screen": "tasks_bottom_name",
+   "highlights": [
+    "name_box"
+   ]
+  },
+  {
+   "spoken": "Running low on something at the house? That's what the Supplies tab is for.",
+   "tts": "[curious] Running low on something at the house? That's what the Supplies tab is for.",
+   "caption": null,
+   "screen": "supplies_top",
+   "highlights": [
+    "tab_supplies"
+   ]
+  },
+  {
+   "spoken": "It's three steps again: pick the item, say how much is left, and tap Add Item to List.",
+   "tts": "[warmly] It's three steps again: pick the item, say how much is left, and tap Add Item to List.",
+   "caption": null,
+   "screen": "supplies_top",
+   "highlights": [
+    "supplies_welcome"
+   ]
+  },
+  {
+   "spoken": "Tap the first box to open the list of items the house uses.",
+   "tts": "Tap the first box to open the list of items the house uses.",
+   "caption": null,
+   "screen": "supplies_list",
+   "highlights": [
+    "item_input"
+   ]
+  },
+  {
+   "spoken": "Or start typing. Type paper, and you'll see paper towels and toilet paper.",
+   "tts": "Or start typing. Type paper, and you'll see paper towels and toilet paper.",
+   "caption": null,
+   "screen": "supplies_typed",
+   "highlights": []
+  },
+  {
+   "spoken": "Can't find it? You can add what you typed as a new item.",
+   "tts": "Can't find it? You can add what you typed as a new item.",
+   "caption": null,
+   "screen": "supplies_typed",
+   "highlights": []
+  },
+  {
+   "spoken": "Then say how much is left, like 2 rolls or half a bottle.",
+   "tts": "Then say how much is left, like 2 rolls or half a bottle.",
+   "caption": null,
+   "screen": "supplies",
+   "highlights": [
+    "howmuch"
+   ]
+  },
+  {
+   "spoken": "Tap Add Item to List, and we'll restock it.",
+   "tts": "[happy] Tap Add Item to List, and we'll restock it.",
+   "caption": null,
+   "screen": "supplies",
+   "highlights": [
+    "additem"
+   ]
+  },
+  {
+   "spoken": "Need the pool service or a plumber? The Contractors tab has La Maison's maintenance vendors.",
+   "tts": "[curious] Need the pool service or a plumber? The Contractors tab has La Maison's maintenance vendors.",
+   "caption": null,
+   "screen": "contractors_top",
+   "highlights": [
+    "tab_contractors"
+   ]
+  },
+  {
+   "spoken": "Find the contractor you need, then tap to text or email them.",
+   "tts": "[warmly] Find the contractor you need, then tap to text or email them.",
+   "caption": null,
+   "screen": "contractors_top",
+   "highlights": [
+    "contractors_welcome"
+   ]
+  },
+  {
+   "spoken": "The search box finds a vendor by name, type, phone, or email.",
+   "tts": "The search box finds a vendor by name, type, phone, or email.",
+   "caption": null,
+   "screen": "contractors",
+   "highlights": [
+    "search"
+   ]
+  },
+  {
+   "spoken": "Type pool, for example, and the pool service comes right up.",
+   "tts": "Type pool, for example, and the pool service comes right up.",
+   "caption": null,
+   "screen": "contractors_search",
+   "highlights": []
+  },
+  {
+   "spoken": "Tap Text or Email to reach them directly.",
+   "tts": "Tap Text or Email to reach them directly.",
+   "caption": null,
+   "screen": "contractors",
+   "highlights": [
+    "text_btn",
+    "email_btn"
+   ]
+  },
+  {
+   "spoken": "If a vendor has no email on file, the Email button is faded, so send a text.",
+   "tts": "If a vendor has no email on file, the Email button is faded, so send a text.",
+   "caption": null,
+   "screen": "contractors_more",
+   "highlights": [
+    "email_faded"
+   ]
+  },
+  {
+   "spoken": "And if you ever forget a step, the Help tab has it all in writing.",
+   "tts": "[happy] And if you ever forget a step, the Help tab has it all in writing.",
+   "caption": null,
+   "screen": "help",
+   "highlights": [
+    "tab_help"
+   ]
+  },
+  {
+   "spoken": "It covers the whole visit: pick your dates, get on the calendar, then use Tasks, Supplies, and Contractors on the day.",
+   "tts": "It covers the whole visit: pick your dates, get on the calendar, then use Tasks, Supplies, and Contractors on the day.",
+   "caption": null,
+   "screen": "help",
+   "highlights": [
+    "help_welcome"
+   ]
+  },
+  {
+   "spoken": "That's everything. Thank you for taking such good care of La Maison.",
+   "tts": "[warmly] That's everything. Thank you for taking such good care of La Maison.",
+   "caption": null,
+   "screen": "END",
+   "highlights": []
+  }
+ ]
+}
