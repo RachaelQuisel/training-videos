@@ -35,9 +35,13 @@ Screenshots show whatever the app shows. That can include names, phone numbers, 
 
 ## What the skill tells Claude not to do
 
-- Do not press a button that saves, sends, or submits in the app.
-- Do not change the app.
-- Stop every request to the app that is not a read, when the capture script's read-only setting is on.
+- Do not press a button that saves, sends, or submits on a real person's record.
+- Do not change the app's design or settings.
+- Stop requests to the app's API that match the capture script's read-only pattern and are not reads, when that setting is on.
+
+## The create-and-delete demo
+
+The skill shows the app's main create action and its delete action on a test record. That step makes one test record in the app and then deletes it, so it does change app data for a short time. A new record can start the app's automations, such as an email or a text message. Before the demo, the skill tells Claude to check those automations, use a test record whose email and phone belong to you, and stop and ask you if an automation could reach anyone else or do something a delete can't undo.
 
 These are instructions and a script setting. The tools and permissions you allow in your own session decide what actions are possible.
 

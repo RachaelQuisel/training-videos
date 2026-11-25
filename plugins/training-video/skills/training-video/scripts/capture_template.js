@@ -61,15 +61,22 @@ const wait = (p, ms) => p.waitForTimeout(ms);
   // await p.locator('button[title="Send SMS"]').first().click(); await wait(p, 1000);
   // await shot(p, 'smsmenu'); await p.keyboard.press('Escape');
 
-  // 5. Create and delete on a TEST record (demo.js only, READ_ONLY_API = null)
-  // p.on('dialog', d => d.accept());
+  // 5. Create and delete on a TEST record (demo.js only, READ_ONLY_API = null). See Step 3 of SKILL.md.
+  //    demo.js should start with: Object.assign(boxes, JSON.parse(fs.readFileSync('boxes.json')))
+  // p.on('dialog', d => /delete/i.test(d.message()) ? d.accept() : d.dismiss());   // accept only a delete confirm
   // await p.getByText('Testy Testerson', { exact: true }).first().click(); await wait(p, 2000);
-  // await p.getByRole('button', { name: 'Generate certificate' }).click(); await wait(p, 6000);
-  // await shot(p, 'created');
-  // await p.getByText('View', { exact: true }).first().click(); await wait(p, 3000);
-  // await box(p, 'delete_button', p.getByRole('button', { name: 'Delete' })); await shot(p, 'record_page');
-  // await p.getByRole('button', { name: 'Delete' }).click(); await wait(p, 3000);
-  // await shot(p, 'deleted');
+  // await box(p, 'create_button', p.getByRole('button', { name: 'Generate certificate' })); await shot(p, 'demo_before_create');
+  // await p.getByRole('button', { name: 'Generate certificate' }).click();
+  // await p.getByText(/certificate issued/i).first().waitFor({ timeout: 60000 }); await shot(p, 'demo_created');
+  // await p.getByText('Open record', { exact: true }).first().click(); await p.waitForURL(/\/certificate\/rec/);
+  // const createdId = p.url().match(/rec[A-Za-z0-9]{14}/)[0]; console.log('CREATED RECORD', createdId);   // report this if a later step fails
+  // await box(p, 'delete_button', p.getByRole('button', { name: 'Delete' })); await shot(p, 'demo_record_page');
+  // if (!p.url().includes(createdId)) throw new Error('Not on the created record; stopping before Delete. Record ' + createdId);
+  // await p.getByRole('button', { name: 'Delete' }).first().click();
+  // const dlg = p.getByRole('dialog'); await dlg.waitFor(); await shot(p, 'demo_confirm');
+  // await dlg.getByRole('button', { name: 'Delete' }).click();       // the confirm button inside the app's own box
+  // await dlg.waitFor({ state: 'hidden', timeout: 30000 }); await shot(p, 'demo_deleted');
+  // Then read Airtable for createdId and confirm the record is gone.
 
   fs.writeFileSync('boxes.json', JSON.stringify(boxes, null, 1));
   console.log('boxes:', Object.keys(boxes).join(', '));

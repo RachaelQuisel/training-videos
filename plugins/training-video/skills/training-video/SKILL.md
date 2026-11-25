@@ -14,7 +14,7 @@ Build a how-to video of a web app for people who do not work in software.
 - A caption bar repeats the spoken line.
 - The output is an MP4 at 1280x720, usually 4 to 8 minutes long.
 
-This skill reads the app and makes the video. It also shows the app's main create action and its delete action on a test record, because staff need to see both. It does not change the app's design, publish the app, or suggest changes to the app.
+This skill reads the app and makes the video. It also shows the app's main create action and its delete action on a test record, because staff need to see both. That part makes one test record in the app and then deletes it, and it can start the app's automations. It does not change the app's design, publish the app, or suggest changes to the app.
 
 Read `references/script-rules.md` before you write the script. It holds the tone rules, the pronunciation spellings, and the file formats the scripts read.
 
@@ -68,25 +68,29 @@ It saves `frames/<screen>.png` at 1280x720. It saves `boxes.json` with the posit
 
 - Move through the app as a user would. Open tabs, records, dropdowns, and menus for screenshots. Press Escape to close them.
 - Change no real person's data. On real records, do not press a button that saves, sends, or submits. Say in the report which buttons you did not press.
-- Set `READ_ONLY_API` in the main capture script. It stops each request that is not a read before the request leaves the computer.
+- Set `READ_ONLY_API` in the main capture script. It stops requests to the app's API that match its pattern and are not on its list of reads. It does not check requests outside that pattern, so set the pattern to cover the app's whole API.
 - Report how many requests were stopped. The expected number is zero.
-
-### Show the create action and the delete action on a test record
-
-Run this part as its own capture script, `demo.js`, with `READ_ONLY_API` set to null. Keep `READ_ONLY_API` on in the main capture script.
-
-1. Find a test record in the app. Search for "test". Rachael's test records usually carry her own email address. If you find no test record, ask the user which record to use before you click anything.
-2. Check the base's automations for the table the create action writes to. A new record can start an email or a text message. Pick a test record whose email and phone belong to the user.
-3. Before you click, read the matching Airtable table with the Airtable connector. Note what the test record has now.
-4. Click the create action on the test record only. Screenshot the result, such as the saved status or the PDF that opens.
-5. Open the new record. Click its delete action. If the browser asks to confirm, accept with `p.on('dialog', d => d.accept())`. If the app shows its own confirm button, click that button. Screenshot each step.
-6. Read Airtable again. Confirm the test record is back to how it was before the click. Note the ID of the record you made and deleted.
-7. Delete only the record this run made. If the delete does not go through, stop and give the user the record ID so the record can be removed.
-
 - You may check a box or type in a search field. Those actions only change what the page shows.
 - Scroll a target into view before you measure it. Measure it again after any scroll.
 - For a narrow app shaped like a phone screen, set `ZOOM` to 4/3 in the capture script.
 - You cannot capture an app behind a login this way. Ask the user for screenshots, and add the highlight positions to `extra_boxes` by hand.
+
+### Show the create action and the delete action on a test record
+
+Use this flow only for an action that makes a new, separate record, such as Generate certificate. If the action changes the test record itself, such as Save on a form, note the fields it changes before you click and put them back afterward.
+
+Run this part as its own capture script, `demo.js`, with `READ_ONLY_API` set to null. Keep `READ_ONLY_API` on in the main capture script. Have `demo.js` load the main capture's `boxes.json` and add its own boxes to it, and give its screenshots their own names, so the main capture's files are kept.
+
+1. Find a test record in the app. Search for "test". Rachael's test records usually carry her own email address. If you find no test record, ask the user which record to use before you click anything.
+2. Check the automations the create action can start. If the app sits on an Airtable base, read the base's automations with the Airtable connector. Look for anything that sends an email or a text, posts a message, or reaches another system. If an automation could reach someone other than the user, or could do something that a delete can't undo, stop and ask the user first.
+3. Before you click, note what the test record has now. If the app sits on an Airtable base, read the matching table with the Airtable connector. Otherwise, screenshot the test record's page in the app.
+4. Click the create action on the test record only. Wait for the app's own success message, not a fixed number of seconds. Screenshot the result, such as the saved status or the PDF that opens.
+5. Note the new record's ID right away, before anything else. The record's page address often holds the ID. From this point, if any step fails, tell the user the ID so the record can be removed.
+6. Open the new record from its own link, not the first View button on the page. Check that the page address holds the ID from step 5 before you click Delete.
+7. Click the record's delete action. If the app shows its own confirm box, screenshot it and click the confirm button inside that box. If the browser shows a dialog instead, accept it only when its message is about deleting. Screenshot each step.
+8. Wait for the app to show the record is gone. Then read Airtable, or the app, again. Confirm the record with the ID from step 5 is gone and the test record is back to how it was before the click.
+9. Delete only the record this run made. If the delete does not go through, stop and give the user the record ID.
+10. If you need to run the demo again, first check that the earlier run's record is gone. A second run makes another record and can start the same automations again.
 
 ## Step 4: Narration
 
