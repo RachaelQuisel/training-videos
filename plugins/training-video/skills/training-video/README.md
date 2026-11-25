@@ -16,14 +16,15 @@ You review the outline before any screen is captured and before any voice is pai
 
 1. It lists every tab and main button in the application. The outline covers the whole application or names what it leaves out.
 2. It writes the script in plain English.
-3. It captures the screens. It does not press a button that saves, sends, or submits.
-4. It tests how the voice says each name before it pays for the full narration.
-5. It builds the slides and times each one to the voice.
-6. It checks the finished video against the script.
+3. It captures the screens. On real records, it does not press a button that saves, sends, or submits.
+4. It shows the create action and the delete action on a test record. It makes one test record, checks the app's automations first, and deletes that record afterward.
+5. It tests how the voice says each name before it pays for the full narration.
+6. It builds the slides and times each one to the voice.
+7. It checks the finished video against the script.
 
 If one line comes out wrong, it replaces that line only.
 
-The skill only reads the application and makes the video. It does not change the application.
+The skill does not change the application's design or settings. The only data it changes is the one test record it makes and deletes for the demo.
 
 ## Example
 

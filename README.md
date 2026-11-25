@@ -74,12 +74,12 @@ Type a request inside Claude Code. Examples:
 1. You give the plugin a link. You answer five questions: who is watching, which voice, how to handle personal data on screen, which colors, and how long.
 2. The plugin reads the live app. It lists every tab and button.
 3. The plugin writes the script. It shows you the outline before anything costs money.
-4. The plugin takes the screenshots. It blocks every request that would save data. It does not press a button that saves, sends, or submits.
+4. The plugin takes the screenshots. On real records, it blocks requests that would save data and does not press a button that saves, sends, or submits. It shows the create action and the delete action on one test record, which it makes and then deletes.
 5. The plugin tests the voice on one short clip. Then it makes the full narration.
 6. The plugin builds the slides, times them to the voice, and assembles the video.
 7. The plugin checks the video. It reports the length, the credits spent, and what it checked.
 
-The plugin only reads the app and makes the video. It does not change the app.
+The plugin does not change the app's design or settings. The only data it changes is the one test record it makes and deletes for the demo.
 
 ## What it works with
 

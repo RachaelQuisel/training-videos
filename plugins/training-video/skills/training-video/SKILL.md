@@ -14,7 +14,7 @@ Build a how-to video of a web app for people who do not work in software.
 - A caption bar repeats the spoken line.
 - The output is an MP4 at 1280x720, usually 4 to 8 minutes long.
 
-This skill only reads the app and makes the video. It does not edit, publish, or suggest changes to the app.
+This skill reads the app and makes the video. It also shows the app's main create action and its delete action on a test record, because staff need to see both. That part makes one test record in the app and then deletes it, and it can start the app's automations. It does not change the app's design, publish the app, or suggest changes to the app.
 
 Read `references/script-rules.md` before you write the script. It holds the tone rules, the pronunciation spellings, and the file formats the scripts read.
 
@@ -42,6 +42,7 @@ Then show the script outline and the list of screens. Wait for a yes before you 
 - Read the app again before every new cut, even later the same day.
 - List every tab, menu item, and main button before you write the script. Build the outline from that list.
 - If you leave a tab out on purpose, name it in the outline. The user can then overrule you.
+- Find the main create action, such as Generate, Create, Submit, or Save. Find the matching delete action, such as Delete, Remove, or Cancel. Look on the record's own page as well as the main screen. A delete button often sits only on the record's page.
 - If the app sits on an Airtable base, read field options, statuses, and definitions from the live base for every fact the script states.
 - If a how-to guide already exists, use it as the script source. Check each claim against the app.
 
@@ -56,22 +57,40 @@ Before you leave this step:
 - Run the `voice-align` skill on the spoken lines. Rewording a line now is free. Rewording it after Step 4 costs credits.
 - Keep the pronunciation spellings from `references/script-rules.md`.
 - Count the words in each segment again. Each segment has 8 to 25 words.
+- Give the create action and the delete action their own sections. Show the click, the result, and how to remove a record made by mistake.
 - Compare every highlight key and screen name in `script.json` against the Step 1 list. If one is not on the list, rename it, remove it, or add its capture to the plan.
 
-## Step 3: Capture the screens without saving anything
+## Step 3: Capture the screens
 
 Copy `scripts/capture_template.js`. Fill in the URL and the clicks. Run it with node.
 
 It saves `frames/<screen>.png` at 1280x720. It saves `boxes.json` with the position of every highlight target.
 
 - Move through the app as a user would. Open tabs, records, dropdowns, and menus for screenshots. Press Escape to close them.
-- Change no data. Do not press a button that saves, sends, or submits. Say in the report which buttons you did not press.
-- Set `READ_ONLY_API` in the capture script. It stops every request that is not a read before the request leaves the computer.
+- Change no real person's data. On real records, do not press a button that saves, sends, or submits. Say in the report which buttons you did not press.
+- Set `READ_ONLY_API` in the main capture script. It stops requests to the app's API that match its pattern and are not on its list of reads. It does not check requests outside that pattern, so set the pattern to cover the app's whole API.
 - Report how many requests were stopped. The expected number is zero.
 - You may check a box or type in a search field. Those actions only change what the page shows.
 - Scroll a target into view before you measure it. Measure it again after any scroll.
 - For a narrow app shaped like a phone screen, set `ZOOM` to 4/3 in the capture script.
 - You cannot capture an app behind a login this way. Ask the user for screenshots, and add the highlight positions to `extra_boxes` by hand.
+
+### Show the create action and the delete action on a test record
+
+Use this flow only for an action that makes a new, separate record, such as Generate certificate. If the action changes the test record itself, such as Save on a form, note the fields it changes before you click and put them back afterward.
+
+Run this part as its own capture script, `demo.js`, with `READ_ONLY_API` set to null. Keep `READ_ONLY_API` on in the main capture script. Have `demo.js` load the main capture's `boxes.json` and add its own boxes to it, and give its screenshots their own names, so the main capture's files are kept.
+
+1. Find a test record in the app. Search for "test". Rachael's test records usually carry her own email address. If you find no test record, ask the user which record to use before you click anything.
+2. Check the automations the create action can start. If the app sits on an Airtable base, read the base's automations with the Airtable connector. Look for anything that sends an email or a text, posts a message, or reaches another system. If an automation could reach someone other than the user, or could do something that a delete can't undo, stop and ask the user first.
+3. Before you click, note what the test record has now. If the app sits on an Airtable base, read the matching table with the Airtable connector. Otherwise, screenshot the test record's page in the app.
+4. Click the create action on the test record only. Wait for the app's own success message, not a fixed number of seconds. Screenshot the result, such as the saved status or the PDF that opens.
+5. Note the new record's ID right away, before anything else. The record's page address often holds the ID. From this point, if any step fails, tell the user the ID so the record can be removed.
+6. Open the new record from its own link, not the first View button on the page. Check that the page address holds the ID from step 5 before you click Delete.
+7. Click the record's delete action. If the app shows its own confirm box, screenshot it and click the confirm button inside that box. If the browser shows a dialog instead, accept it only when its message is about deleting. Screenshot each step.
+8. Wait for the app to show the record is gone. Then read Airtable, or the app, again. Confirm the record with the ID from step 5 is gone and the test record is back to how it was before the click.
+9. Delete only the record this run made. If the delete does not go through, stop and give the user the record ID.
+10. If you need to run the demo again, first check that the earlier run's record is gone. A second run makes another record and can start the same automations again.
 
 ## Step 4: Narration
 
@@ -147,6 +166,7 @@ Replace the last words with the names in your script.
 - Read the transcript it prints. Look for names that were heard wrong.
 - If a name looks wrong, transcribe that line again with a larger faster-whisper model before you change anything. The small model can mishear a name that was spoken correctly.
 - Open `check.jpg`. Confirm that each of the five frames shows the slide for the line spoken at that moment.
+- Read Airtable once more. Confirm the test record made for the demo is gone and no real record changed.
 - If a slide appears late, change `--lead`.
 
 If one name or one line is wrong, replace only that segment:
@@ -169,6 +189,7 @@ Make the full narration again only when more than about a third of the segments 
   - the length
   - what you checked
   - what personal data is visible
+  - the test record made and deleted for the demo, with its record ID
   - what you did not check
   - one next step that takes under two minutes
 - The usual next step is to play the first 30 seconds.
@@ -180,5 +201,6 @@ When the app changes later, list its tabs and buttons again. Compare that list w
 - The slide builder draws captions and cards as text, so it loads a font file. It looks for one on Linux, macOS, and Windows. If it finds none, add a path in `find_font()` in `build_slides.py`.
 - `capture_template.js` loads Playwright from the project folder first, then from the machine-wide npm install.
 - faster-whisper cannot load audio files with the installed `av` package. The scripts read the WAV file with `wave` and `numpy` for that reason. Keep that when you edit them.
+- A create action can start an automation, such as an email or a text message to the person on the record. Check the automations before the demo, and use a test record whose email and phone belong to the user.
 - Keep each shell step shorter than the tool's time limit. Run installs in the background, and split long ffmpeg or transcription jobs.
 - `scripts/elevenlabs_client.py` passes the key to the ElevenLabs client directly. The ElevenLabs package reads the environment before the key file is loaded. A client created without the key sends no key, and every request fails with a 401 error. Keep that when you edit it.

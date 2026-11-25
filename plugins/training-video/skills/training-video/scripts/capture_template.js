@@ -8,7 +8,9 @@
 // - 1280x720 viewport, the same size the slides use, so boxes map 1:1.
 // - Scroll a target into view before measuring it; measure again after any scroll,
 //   because boundingBox() is relative to the viewport.
-// - Open dropdowns and menus to screenshot them, then press Escape. Change no data.
+// - Open dropdowns and menus to screenshot them, then press Escape. Change no real person's data.
+// - The create-and-delete demo runs in its own copy (demo.js) with READ_ONLY_API = null, on a test record only.
+//   See section 5 below and Step 3 of SKILL.md.
 // - READ_ONLY_API stops every request to the app's API that is not a read, so a mistaken click cannot
 //   save anything. Set the two patterns for the app; every stopped request is printed.
 // - For a narrow, phone-shaped app, set ZOOM to 4/3: the page renders at 960x540 and the frames still
@@ -58,6 +60,23 @@ const wait = (p, ms) => p.waitForTimeout(ms);
   // 4. A popover opened by a titled button
   // await p.locator('button[title="Send SMS"]').first().click(); await wait(p, 1000);
   // await shot(p, 'smsmenu'); await p.keyboard.press('Escape');
+
+  // 5. Create and delete on a TEST record (demo.js only, READ_ONLY_API = null). See Step 3 of SKILL.md.
+  //    demo.js should start with: Object.assign(boxes, JSON.parse(fs.readFileSync('boxes.json')))
+  // p.on('dialog', d => /delete/i.test(d.message()) ? d.accept() : d.dismiss());   // accept only a delete confirm
+  // await p.getByText('Testy Testerson', { exact: true }).first().click(); await wait(p, 2000);
+  // await box(p, 'create_button', p.getByRole('button', { name: 'Generate certificate' })); await shot(p, 'demo_before_create');
+  // await p.getByRole('button', { name: 'Generate certificate' }).click();
+  // await p.getByText(/certificate issued/i).first().waitFor({ timeout: 60000 }); await shot(p, 'demo_created');
+  // await p.getByText('Open record', { exact: true }).first().click(); await p.waitForURL(/\/certificate\/rec/);
+  // const createdId = p.url().match(/rec[A-Za-z0-9]{14}/)[0]; console.log('CREATED RECORD', createdId);   // report this if a later step fails
+  // await box(p, 'delete_button', p.getByRole('button', { name: 'Delete' })); await shot(p, 'demo_record_page');
+  // if (!p.url().includes(createdId)) throw new Error('Not on the created record; stopping before Delete. Record ' + createdId);
+  // await p.getByRole('button', { name: 'Delete' }).first().click();
+  // const dlg = p.getByRole('dialog'); await dlg.waitFor(); await shot(p, 'demo_confirm');
+  // await dlg.getByRole('button', { name: 'Delete' }).click();       // the confirm button inside the app's own box
+  // await dlg.waitFor({ state: 'hidden', timeout: 30000 }); await shot(p, 'demo_deleted');
+  // Then read Airtable for createdId and confirm the record is gone.
 
   fs.writeFileSync('boxes.json', JSON.stringify(boxes, null, 1));
   console.log('boxes:', Object.keys(boxes).join(', '));
